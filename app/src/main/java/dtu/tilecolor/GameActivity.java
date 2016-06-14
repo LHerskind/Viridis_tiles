@@ -39,11 +39,10 @@ public class GameActivity extends Activity {
 
         //TODO - Visualize map
 
-        for(int i = 0; i < mapMatrix.length;i++){
-            for(int j = 0; j < mapMatrix[i].length; j++){
+        for(int i = 1; i < mapMatrix.length-1;i++){
+            for(int j = 1; j < mapMatrix[i].length-1; j++){
                 //TODO - fix plads i tileView kald
-                new tileView(mapMatrix[i][j]);
-
+                //new tileView(mapMatrix[i][j],i,j);
             }
         }
 
