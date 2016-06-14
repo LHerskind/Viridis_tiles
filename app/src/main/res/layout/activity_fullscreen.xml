@@ -5,7 +5,19 @@
     android:background="#0099cc"
     tools:context="dtu.tilecolor.FullscreenActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fullscreen_content" >
 
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/viridis_launcher"
+        android:layout_gravity="center" />
+
+
+    </FrameLayout>
 
 </FrameLayout>

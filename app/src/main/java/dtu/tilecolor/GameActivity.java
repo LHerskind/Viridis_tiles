@@ -28,7 +28,7 @@ public class GameActivity extends Activity {
 
         mFrame = (RelativeLayout) findViewById(R.id.frame);
 
-        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.g);
+       // mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.g);
 
 
     }
