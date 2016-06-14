@@ -11,9 +11,10 @@ public class tileView extends View {
 
     private final Paint mPaint = new Paint();
 
-
     public tileViev(Context context, char c, int i, int j){
         super(context);
+
+
 
     }
 

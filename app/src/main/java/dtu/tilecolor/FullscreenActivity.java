@@ -57,7 +57,7 @@ public class FullscreenActivity extends AppCompatActivity {
                                 if(adapter!=null){
                                     adapter.notifyDataSetChanged();
                                 }
-                                view.setAlpha(1);
+//                                view.setAlpha(1);
                             }
                 });
             }

@@ -17,7 +17,7 @@ public class GameActivity extends Activity {
     private Bitmap mBitmap;
     private int mDisplayWidth,mDisplayHeight;
     private GestureDetector mGestureDetector;
-    private char[][] mapMatrix = {{'w','w','w','w'}{'w','s','r','w'}{'w','w','w','w'}};
+    private char[][] mapMatrix = {{'w','w','w','w'},{'w','s','r','w'},{'w','w','w','w'}};
 
 
     @Override
