@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">TileColor</string>
-    <string name="dummy_button">Play the game</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="app_name">Viridis Tiles</string>
+
 </resources>
