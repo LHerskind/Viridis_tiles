@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TileColor.iml" filepath="$PROJECT_DIR$/TileColor.iml" />
       <module fileurl="file://$PROJECT_DIR$/Viridis_tiles.iml" filepath="$PROJECT_DIR$/Viridis_tiles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Viridis_tiles.iml" filepath="$PROJECT_DIR$/Viridis_tiles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
