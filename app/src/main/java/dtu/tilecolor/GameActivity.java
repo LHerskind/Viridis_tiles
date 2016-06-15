@@ -45,7 +45,7 @@ public class    GameActivity extends Activity {
         for(int i = 1; i < mapMatrix.length-1;i++){
             for(int j = 1; j < mapMatrix[i].length-1; j++){
                 //TODO - fix plads i tileView kald
-                new tileView(this,mapMatrix[i][j],i,j);
+                new TileView(this,mapMatrix[i][j],i,j);
             }
         }
     }
