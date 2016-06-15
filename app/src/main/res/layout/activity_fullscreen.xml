@@ -15,8 +15,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:textColor="@color/text_color"
-        android:id="@+id/titleView" />
-
+        android:id="@+id/titleView"
+        />
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -24,8 +24,8 @@
         android:layout_margin="20dp"
         android:padding="5dp"
         android:background="@color/border_color"
-        android:layout_below="@+id/titleView">
-
+        android:layout_below="@+id/titleView"
+        >
 
         <GridView
             android:id="@+id/gridview"
@@ -36,8 +36,8 @@
             android:horizontalSpacing="10dp"
             android:verticalSpacing="10dp"
             android:padding="10dp"
-            >
-        </GridView>
+            />
+
     </FrameLayout>
 
 </RelativeLayout>

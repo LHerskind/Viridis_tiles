@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -36,7 +35,7 @@ public class GameActivity extends Activity {
 
         for(int i = 1; i < mapMatrix.length-1;i++){
             for(int j = 1; j < mapMatrix[i].length-1; j++){
-                mFrame.addView(new tileView(this,mapMatrix[i][j],i,j));
+                mFrame.addView(new TileView(this,mapMatrix[i][j],i,j));
             }
         }
     }
