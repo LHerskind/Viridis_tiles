@@ -12,14 +12,12 @@
         android:background="@color/dark_background"
         >
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/viridis_launcher"
-        android:layout_gravity="center"
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/frame"
         >
-    </ImageView>
+    </RelativeLayout>
 
         <LinearLayout
             android:orientation="vertical"

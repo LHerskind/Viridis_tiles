@@ -14,8 +14,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,8 +50,14 @@ public class FullscreenActivity extends AppCompatActivity {
 
         ArrayList<MenuItem> values = new ArrayList<MenuItem>();
 
-        for(int i = 0; i < 30; i++){
-            values.add(new MenuItem("0:"+i,""+i));
+        for(int i = 0; i < 1; i++){
+            try {
+                LoadMap loadmap = new LoadMap(mContext, "maps/map1.txt");
+                char[][] map = loadmap.getMap();
+                values.add(new MenuItem("0:"+i,""+i,map));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         MenuItemAdapter adapter = new MenuItemAdapter (this, values);
@@ -82,7 +90,6 @@ public class FullscreenActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-
             MenuItem item = getItem(position);
 
             if (convertView == null) {
@@ -93,6 +100,16 @@ public class FullscreenActivity extends AppCompatActivity {
 
             numberOfSteps.setText(item.getSteps());
             timeToComplete.setText(item.getTime());
+
+            RelativeLayout mFrame = (RelativeLayout) convertView.findViewById(R.id.frame);
+
+            char[][] mapMatrix = item.getMap();
+
+            for(int i = 1; i < mapMatrix.length-1;i++){
+                for(int j = 1; j < mapMatrix[i].length-1; j++){
+                    mFrame.addView(new TileView(mContext,mapMatrix[i][j],i,j));
+                }
+            }
 
             return convertView;
         }

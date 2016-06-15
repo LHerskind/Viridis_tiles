@@ -26,7 +26,6 @@ public class GameActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("TAG", "PIS OG FUCKING LORT");
 
 
         setContentView(R.layout.main);
