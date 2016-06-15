@@ -22,7 +22,6 @@ public class Game_Background {
                     return new int[] {i,j};
                 }
             }
-
         }
         return new int[] {0,0};
     }
@@ -38,7 +37,6 @@ public class Game_Background {
     public boolean hasLost(){
         return false;
     }
-
 
     public char[][] getMapMatrix() {
         return mapMatrix;
