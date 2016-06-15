@@ -65,7 +65,7 @@ public class Game_Background {
 
     public boolean hasWon(){
         for(int i = 0; i < mapMatrix.length; i++){
-            for(int j = 0;j < mapMatrix[i].length){
+            for(int j = 0;j < mapMatrix[i].length; j++){
                 if(mapMatrix[i][j] == 'r'){
                     return false;
                 }
