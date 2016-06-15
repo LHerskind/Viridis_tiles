@@ -11,14 +11,14 @@ import android.widget.LinearLayout;
 /**
  * Created by Meowasaurus on 14-06-2016.
  */
-public class tileView extends View {
+public class TileView extends View {
 
     private final Paint mPaint = new Paint();
     private char c;
     private int i;
     private int j;
 
-    public tileView(Context context, char c, int i, int j){
+    public TileView(Context context, char c, int i, int j){
         super(context);
         this.c=c;
         this.i=i;
