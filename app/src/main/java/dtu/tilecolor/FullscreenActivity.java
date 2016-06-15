@@ -44,22 +44,12 @@ public class FullscreenActivity extends AppCompatActivity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.itemlayout, R.id.label, values);
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
 
-                Toast.makeText(mContext, item.toString(), Toast.LENGTH_LONG).show();
-
-                view.animate().setDuration(1000).alpha(0).withEndAction(new Runnable() {
-                            @Override
-                            public void run(){
-                                if(adapter!=null){
-                                    adapter.notifyDataSetChanged();
-                                }
-//                                view.setAlpha(1);
-                            }
-                });
+                Toast.makeText(mContext, item, Toast.LENGTH_LONG).show();
+                // Når vi skal opdatere hvordan det ser ud, brug adapter.notifyDataSetChanged();
             }
         });
     }
