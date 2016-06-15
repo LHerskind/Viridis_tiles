@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
@@ -25,15 +24,14 @@ public class GameActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main);
+        setContentView(R.layout.gamelayout);
         Intent intent = getIntent();
         mapMatrix = (char[][]) intent.getExtras().getSerializable("map");
 
-        mFrame = (RelativeLayout) findViewById(R.id.frame);
+        mFrame = (RelativeLayout) findViewById(R.id.gameframe);
 
         for(int i = 1; i < mapMatrix.length-1;i++){
             for(int j = 1; j < mapMatrix[i].length-1; j++){
-                Log.i("TAG",""+i + " "+j + " "+mapMatrix[i][j]);
                 mFrame.addView(new TileView(this,mapMatrix[i][j],i,j));
             }
         }

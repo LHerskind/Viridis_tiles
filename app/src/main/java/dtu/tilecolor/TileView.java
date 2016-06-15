@@ -35,7 +35,7 @@ public class TileView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-    //    super.onDraw(canvas);
+        super.onDraw(canvas);
         setColor(c);
         int padding = size/10;
         int x = size*(j-1);
@@ -48,7 +48,6 @@ public class TileView extends View {
         int black = ContextCompat.getColor(getContext(), R.color.dark_background);
         int red = ContextCompat.getColor(getContext(), R.color.red);
         int green = ContextCompat.getColor(getContext(), R.color.green);
-
         if(c == 'w') {
             mPaint.setColor(black);
         } else if (c == 'r'){
