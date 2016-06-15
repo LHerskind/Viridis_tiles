@@ -4,7 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 /**
  * Created by Meowasaurus on 14-06-2016.
@@ -15,34 +18,45 @@ public class TileView extends View {
     private char c;
     private int i;
     private int j;
+    private int size;
 
     public TileView(Context context, char c, int i, int j){
         super(context);
+        this.size = 100;
         this.c=c;
         this.i=i;
         this.j=j;
     }
 
+    public TileView(Context context, char c, int i, int j, int size){
+        this(context,c,i,j);
+        this.size = size;
+    }
+
     @Override
-    protected synchronized void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-        if(c == 'w') {
-            mPaint.setColor(Color.BLUE);
-        } else if (c == 'r'||c == 's'){
-            mPaint.setColor(Color.RED);
-        } else if (c == 'g'){
-            mPaint.setColor(Color.GREEN);
-            //} else if (c == 'p'){
-        }
-        int padding = 10;
-        int size = 100;
-        int x = size*(j);
-        int y = size*(i);
-
+    protected void onDraw(Canvas canvas) {
+    //    super.onDraw(canvas);
+        setColor(c);
+        int padding = size/10;
+        int x = size*(j-1);
+        int y = size*(i-1);
         canvas.drawRect(x,y,x+(size-padding),y+(size-padding),mPaint);
     }
 
+
+    public void setColor(char c){
+        int black = ContextCompat.getColor(getContext(), R.color.dark_background);
+        int red = ContextCompat.getColor(getContext(), R.color.red);
+        int green = ContextCompat.getColor(getContext(), R.color.green);
+
+        if(c == 'w') {
+            mPaint.setColor(black);
+        } else if (c == 'r'){
+            mPaint.setColor(red);
+        } else if (c == 'g'){
+            mPaint.setColor(green);
+        }
+    }
 
 
 }

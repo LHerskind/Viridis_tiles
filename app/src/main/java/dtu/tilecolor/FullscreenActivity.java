@@ -1,32 +1,20 @@
 package dtu.tilecolor;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -101,15 +89,18 @@ public class FullscreenActivity extends AppCompatActivity {
             numberOfSteps.setText(item.getSteps());
             timeToComplete.setText(item.getTime());
 
-            RelativeLayout mFrame = (RelativeLayout) convertView.findViewById(R.id.frame);
+            RelativeLayout mFrame = (RelativeLayout) convertView.findViewById(R.id.littleframe);
 
             char[][] mapMatrix = item.getMap();
 
             for(int i = 1; i < mapMatrix.length-1;i++){
                 for(int j = 1; j < mapMatrix[i].length-1; j++){
-                    mFrame.addView(new TileView(mContext,mapMatrix[i][j],i,j));
+                    mFrame.addView(new TileView(mContext,mapMatrix[i][j],i,j,25));
                 }
             }
+            mFrame.invalidate();
+            convertView.invalidate();
+            mFrame.setMinimumHeight(25*(mapMatrix.length-2) );
 
             return convertView;
         }
