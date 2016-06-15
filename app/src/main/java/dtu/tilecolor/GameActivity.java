@@ -7,6 +7,7 @@ import android.os.PersistableBundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 
 /**
  * Created by Meowasaurus on 14-06-2016.
@@ -14,10 +15,13 @@ import android.widget.RelativeLayout;
 public class GameActivity extends Activity {
 
     private RelativeLayout mFrame;
+    private TableLayout mTable;
     private Bitmap mBitmap;
     private int mDisplayWidth,mDisplayHeight;
     private GestureDetector mGestureDetector;
-    private char[][] mapMatrix = {{'w','w','w','w'},{'w','s','r','w'},{'w','w','w','w'}};
+    private char[][] mapMatrix = {{'w','w','w','w'},{'w','p','r','w'},{'w','w','w','w'}};
+    private int rows = 10;
+    private int collums = 6;
 
 
     @Override
@@ -29,7 +33,6 @@ public class GameActivity extends Activity {
         mFrame = (RelativeLayout) findViewById(R.id.frame);
 
 
-
     }
 
     @Override
@@ -37,15 +40,14 @@ public class GameActivity extends Activity {
         //TODO - lyd
         super.onResume();
 
-        //TODO - Visualize map
+        //TODO - Visualize map (Tror det er gjort)
 
         for(int i = 1; i < mapMatrix.length-1;i++){
             for(int j = 1; j < mapMatrix[i].length-1; j++){
                 //TODO - fix plads i tileView kald
-                //new tileView(mapMatrix[i][j],i,j);
+                new tileView(this,mapMatrix[i][j],i,j);
             }
         }
-
     }
 
     @Override
