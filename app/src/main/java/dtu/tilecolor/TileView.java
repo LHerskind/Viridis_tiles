@@ -4,9 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 
 /**
  * Created by Meowasaurus on 14-06-2016.
@@ -31,7 +29,7 @@ public class TileView extends View {
 
         if(c == 'w') {
             mPaint.setColor(Color.BLUE);
-        } else if (c == 'r'){
+        } else if (c == 'r'||c == 's'){
             mPaint.setColor(Color.RED);
         } else if (c == 'g'){
             mPaint.setColor(Color.GREEN);
@@ -45,4 +43,7 @@ public class TileView extends View {
 
         canvas.drawRect(x,y,x+(size-padding),y+(size-padding),mPaint);
     }
+
+
+
 }
