@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,24 +41,23 @@ public class FullscreenActivity extends AppCompatActivity {
         mContext = getApplicationContext();
         // mContentView = findViewById(R.id.fullscreen_content);
 
-        final ListView listview = (ListView) findViewById(R.id.listView);
+        final GridView gridView = (GridView) findViewById(R.id.gridview);
 
         ArrayList<MenuItem> values = new ArrayList<MenuItem>();
 
-        for(int i = 0; i < 15; i++){
-            values.add(new MenuItem("Name="+i,"Hometown="+i));
+        for(int i = 0; i < 30; i++){
+            values.add(new MenuItem("0:"+i,""+i));
         }
 
         MenuItemAdapter adapter = new MenuItemAdapter (this, values);
 
 
-        listview.setAdapter(adapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setAdapter(adapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                String item = (String) parent.getItemAtPosition(position);
-
-                Toast.makeText(mContext, item, Toast.LENGTH_LONG).show();
+                MenuItem item = (MenuItem) parent.getItemAtPosition(position);
+                Toast.makeText(mContext, item.toString(), Toast.LENGTH_LONG).show();
                 // Når vi skal opdatere hvordan det ser ud, brug adapter.notifyDataSetChanged();
             }
         });

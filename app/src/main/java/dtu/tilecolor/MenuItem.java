@@ -21,5 +21,9 @@ public class MenuItem {
         return steps;
     }
 
+    public String toString(){
+        return time +" " + steps;
+    }
+
 
 }
