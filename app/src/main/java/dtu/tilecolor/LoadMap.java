@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 /**
  * Created by Jacob on 15/06/2016.
@@ -17,14 +18,14 @@ public class LoadMap {
     private int col, row;
     public LoadMap(Context context, String filepath) throws IOException {
         InputStream input = context.getResources().getAssets().open(filepath);
-        BufferedReader br = new BufferedReader(new InputStreamReader(input));
+        Scanner scanner = new Scanner(input);
 
-        row = Integer.parseInt(br.readLine());
-        col = Integer.parseInt(br.readLine());
+        row = scanner.nextInt();
+        col = scanner.nextInt();
         String map = "";
 
-        while(br.readLine()!= null){
-            map+=br.readLine();
+        while(scanner.hasNextLine()){
+            map+=scanner.nextLine();
         }
 
         mapArray = new char[row][col];

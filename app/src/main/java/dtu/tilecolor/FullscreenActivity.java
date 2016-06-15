@@ -53,7 +53,6 @@ public class FullscreenActivity extends AppCompatActivity {
 
         MenuItemAdapter adapter = new MenuItemAdapter (this, values);
 
-
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
             @Override
