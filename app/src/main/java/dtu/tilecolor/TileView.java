@@ -30,7 +30,7 @@ public class TileView extends View {
         super.onDraw(canvas);
 
         if(c == 'w') {
-            mPaint.setColor(Color.BLUE);
+            mPaint.setColor(Color.BLACK);
         } else if (c == 'r'){
             mPaint.setColor(Color.RED);
         } else if (c == 'g'){
