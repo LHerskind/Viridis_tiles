@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -13,28 +14,23 @@ import android.widget.LinearLayout;
 public class tileView extends View {
 
     private final Paint mPaint = new Paint();
-    private LinearLayout mFrame;
     private char c;
     private int i;
     private int j;
 
     public tileView(Context context, char c, int i, int j){
         super(context);
-
         this.c=c;
         this.i=i;
         this.j=j;
-
-
-
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         if(c == 'w') {
-            mPaint.setColor(Color.BLACK);
+            mPaint.setColor(Color.BLUE);
         } else if (c == 'r'){
             mPaint.setColor(Color.RED);
         } else if (c == 'g'){
@@ -42,10 +38,11 @@ public class tileView extends View {
             //} else if (c == 'p'){
             // TODO - player
         }
+        int padding = 10;
+        int size = 100;
+        int x = size*(j);
+        int y = size*(i);
 
-        mPaint.setStrokeWidth(0);
-
-        canvas.drawRect(16+(j-1)*(50+10),16+(i-1)*(50+10),50,50,mPaint);
-
+        canvas.drawRect(x,y,x+(size-padding),y+(size-padding),mPaint);
     }
 }

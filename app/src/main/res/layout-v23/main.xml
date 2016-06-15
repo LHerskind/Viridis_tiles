@@ -2,16 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FF444444"
+    android:background="@color/dark_background"
     android:id="@+id/frame">
 
-    <!--<TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:id="@+id/table">
-    </TableLayout>
-    -->
 
 
 </RelativeLayout>

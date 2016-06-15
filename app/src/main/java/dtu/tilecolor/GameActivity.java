@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
@@ -23,29 +24,28 @@ public class GameActivity extends Activity {
     private char[][] mapMatrix;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i("TAG", "PIS OG FUCKING LORT");
+
         setContentView(R.layout.main);
         Intent intent = getIntent();
         mapMatrix = (char[][]) intent.getExtras().getSerializable("map");
+
         mFrame = (RelativeLayout) findViewById(R.id.frame);
+
+        for(int i = 1; i < mapMatrix.length-1;i++){
+            for(int j = 1; j < mapMatrix[i].length-1; j++){
+                mFrame.addView(new tileView(this,mapMatrix[i][j],i,j));
+            }
+        }
     }
 
     @Override
     protected void onResume() {
         //TODO - lyd
         super.onResume();
-
-        //TODO - Visualize map
-
-        for(int i = 1; i < mapMatrix.length-1;i++){
-            for(int j = 1; j < mapMatrix[i].length-1; j++){
-                //TODO - fix plads i tileView kald
-                //new tileView(mapMatrix[i][j],i,j);
-            }
-        }
-    }
-
+   }
     @Override
     protected void onPause() {
         //TODO - lyd
@@ -57,8 +57,6 @@ public class GameActivity extends Activity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
-
-            // Get the size of the display so this View knows where borders are
             mDisplayWidth = mFrame.getWidth();
             mDisplayHeight = mFrame.getHeight();
 
@@ -73,6 +71,7 @@ public class GameActivity extends Activity {
                     @Override
                     public boolean onFling(MotionEvent event1, MotionEvent event2,
                                            float velocityX, float velocityY) {
+                    /*
                         if (velocityX > velocityY) {
                             if (event1.getX() > event2.getX()) {
                                 //TODO
@@ -86,13 +85,9 @@ public class GameActivity extends Activity {
                             } else {
                                 //swipe ned, ryk brik ned
                             }
-                        }
-
-
-                        return false;
-
+                        }*/
+                        return true;
                     }
-
                 });
     }
 
