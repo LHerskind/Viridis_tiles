@@ -3,7 +3,7 @@ package dtu.tilecolor;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
@@ -12,7 +12,7 @@ import android.widget.TableLayout;
 /**
  * Created by Meowasaurus on 14-06-2016.
  */
-public class    GameActivity extends Activity {
+public class GameActivity extends Activity {
 
     private RelativeLayout mFrame;
     private TableLayout mTable;
@@ -20,18 +20,26 @@ public class    GameActivity extends Activity {
     private int mDisplayWidth,mDisplayHeight;
     private GestureDetector mGestureDetector;
     private char[][] mapMatrix = {{'w','w','w','w'},{'w','p','r','w'},{'w','w','w','w'}};
-    private int rows = 10;
-    private int collums = 6;
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
 
         mFrame = (RelativeLayout) findViewById(R.id.frame);
+        Log.i("test","onCreate her");
 
+        for(int i = 1; i < mapMatrix.length-1;i++){
+            for(int j = 1; j < mapMatrix[i].length-1; j++){
+                Log.i("test","2nd Loop her");
+
+                //TODO - fix plads i tileView kald
+
+                mFrame.addView(new TileView(this,mapMatrix[i][j],i,j));
+            }
+        }
 
     }
 
@@ -42,12 +50,7 @@ public class    GameActivity extends Activity {
 
         //TODO - Visualize map (Tror det er gjort)
 
-        for(int i = 1; i < mapMatrix.length-1;i++){
-            for(int j = 1; j < mapMatrix[i].length-1; j++){
-                //TODO - fix plads i tileView kald
-                new TileView(this,mapMatrix[i][j],i,j);
-            }
-        }
+
     }
 
     @Override

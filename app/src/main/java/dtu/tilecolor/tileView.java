@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 /**
  * Created by Meowasaurus on 14-06-2016.
  */
-public class tileView extends View {
+public class TileView extends View {
 
     private final Paint mPaint = new Paint();
     private LinearLayout mFrame;
@@ -18,7 +18,7 @@ public class tileView extends View {
     private int i;
     private int j;
 
-    public tileView(Context context, char c, int i, int j){
+    public TileView(Context context, char c, int i, int j){
         super(context);
 
         this.c=c;
@@ -45,7 +45,7 @@ public class tileView extends View {
 
         mPaint.setStrokeWidth(0);
 
-        canvas.drawRect(16+(j-1)*(50+10),16+(i-1)*(50+10),50,50,mPaint);
+        canvas.drawRect(50+(j-1)*(200+50),50+(i-1)*(200+50),200,200,mPaint);
 
     }
 }
