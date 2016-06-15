@@ -45,7 +45,7 @@ public class tileView extends View {
 
         mPaint.setStrokeWidth(0);
 
-        canvas.drawRect(16+(i-1)*(50+10),16+(j-1)*(50+10),50,50,mPaint);
+        canvas.drawRect(16+(j-1)*(50+10),16+(i-1)*(50+10),50,50,mPaint);
 
     }
 }

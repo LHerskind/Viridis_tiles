@@ -12,7 +12,7 @@ import android.widget.TableLayout;
 /**
  * Created by Meowasaurus on 14-06-2016.
  */
-public class GameActivity extends Activity {
+public class    GameActivity extends Activity {
 
     private RelativeLayout mFrame;
     private TableLayout mTable;
