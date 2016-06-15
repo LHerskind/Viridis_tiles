@@ -71,9 +71,7 @@ public class    GameActivity extends Activity {
 
     private void setupGestureDetector() {
 
-        mGestureDetector = new GestureDetector(this,
-
-                new GestureDetector.SimpleOnGestureListener() {
+        mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
 
 
                     @Override
