@@ -5,6 +5,4 @@
     android:background="@color/dark_background"
     android:id="@+id/frame">
 
-
-
 </RelativeLayout>

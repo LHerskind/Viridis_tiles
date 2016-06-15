@@ -47,7 +47,6 @@ public class TileView extends View {
         } else if (c == 'g'){
             mPaint.setColor(green);
             //} else if (c == 'p'){
-            // TODO - player
         }
         int padding = 10;
         int x = size*(j);
