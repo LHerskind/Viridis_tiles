@@ -6,7 +6,7 @@ package dtu.tilecolor;
 public class Game_Background {
 
 
-    private char[][] mapMatrix = {{'w','w','w','w'},{'w','s','r','w'},{'w','r','r','w'},{'w','w','w','w'}};
+    private char[][] mapMatrix = {{'w','w','w','w'},{'w','s','r','w'},{'w','w','w','w'}};
     private int playerRow;
     private int playerCol;
 
