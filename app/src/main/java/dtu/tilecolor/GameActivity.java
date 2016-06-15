@@ -57,17 +57,6 @@ public class    GameActivity extends Activity {
     }
 
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-
-            // Get the size of the display so this View knows where borders are
-            mDisplayWidth = mFrame.getWidth();
-            mDisplayHeight = mFrame.getHeight();
-
-        }
-    }
 
     private void setupGestureDetector() {
 
