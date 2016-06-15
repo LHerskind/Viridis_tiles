@@ -3,6 +3,7 @@ package dtu.tilecolor;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,15 +59,18 @@ public class FullscreenActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 MenuItem item = (MenuItem) parent.getItemAtPosition(position);
-                Toast.makeText(mContext, item.toString(), Toast.LENGTH_LONG).show();
+               // Toast.makeText(mContext, item.toString(), Toast.LENGTH_LONG).show();
                 // Når vi skal opdatere hvordan det ser ud, brug adapter.notifyDataSetChanged();
                 try {
                     LoadMap loadmap = new LoadMap(mContext, "maps/map1.txt");
-                    Log.i("Hej", String.valueOf(loadmap.getCol()));
+                    Intent intent = new Intent(mContext, GameActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("map",loadmap.getMap());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         });
     }

@@ -16,13 +16,14 @@ public class LoadMap {
 
     private char[][] mapArray;
     private int col, row;
+    private String map;
     public LoadMap(Context context, String filepath) throws IOException {
         InputStream input = context.getResources().getAssets().open(filepath);
         Scanner scanner = new Scanner(input);
 
         row = scanner.nextInt();
         col = scanner.nextInt();
-        String map = "";
+        map = "";
 
         while(scanner.hasNextLine()){
             map+=scanner.nextLine();
@@ -39,5 +40,8 @@ public class LoadMap {
     public char[][] getMap() {
         return mapArray;
     }
+    public String getMapString(){ return map;}
     public int getCol() { return col; }
+    public int getRow() { return row; }
+
 }
