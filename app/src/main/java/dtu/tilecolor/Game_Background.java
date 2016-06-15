@@ -25,7 +25,6 @@ public class Game_Background {
                     return new int[] {i,j};
                 }
             }
-
         }
         return new int[] {0,0};
     }
@@ -80,7 +79,6 @@ public class Game_Background {
                 && mapMatrix[playerRow][playerCol-1]=='w'
                 && mapMatrix[playerRow][playerCol+1]=='w');
     }
-
 
     public char[][] getMapMatrix() {
 
