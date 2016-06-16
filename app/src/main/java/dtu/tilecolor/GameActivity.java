@@ -1,6 +1,7 @@
 package dtu.tilecolor;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -137,7 +138,12 @@ public class GameActivity extends Activity {
                     }
                 }
                 if(gb.hasWon()){
-                    Toast.makeText(mContext, "Du vandt din fede idiot", Toast.LENGTH_SHORT).show();
+                    WinLoseFragment newFragment = new WinLoseFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.gameframe, newFragment);
+                    transaction.addToBackStack(null);
+
+                    transaction.commit();
                 } else if(gb.hasLost()){
                     Toast.makeText(mContext, "Du er en kæmpe taber", Toast.LENGTH_SHORT).show();
                 }
