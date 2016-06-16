@@ -1,12 +1,13 @@
 package dtu.tilecolor;
 
+import android.content.Context;
+
 /**
  * Created by User on 15-Jun-16.
  */
 public class MenuItem {
 
-    private String time;
-    private String steps;
+    private String time, steps;
     private char[][] map;
 
     public MenuItem(String time, String steps, char[][] map) {
