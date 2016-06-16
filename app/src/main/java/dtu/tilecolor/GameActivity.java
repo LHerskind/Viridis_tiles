@@ -1,6 +1,7 @@
 package dtu.tilecolor;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ public class GameActivity extends Activity {
     private GestureDetector mGestureDetector;
     private Game_Background gb;
     private char[][] mapMatrix;
+    private Context mContext;
 
 
     @Override
@@ -29,6 +31,7 @@ public class GameActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.gamelayout);
         Intent intent = getIntent();
+        mContext = this;
         mapMatrix = (char[][]) intent.getExtras().getSerializable("map");
         gb = new Game_Background(mapMatrix);
 
@@ -37,9 +40,9 @@ public class GameActivity extends Activity {
 
         for(int i = 1; i < mapMatrix.length-1;i++){
             for(int j = 1; j < mapMatrix[i].length-1; j++){
-                mFrame.addView(new TileView(this,mapMatrix[i][j],i,j));
+                mFrame.addView(new TileView(mContext,mapMatrix[i][j],i,j));
                 if(mapMatrix[i][j]=='s'){
-                    mFrame.addView(new TileView(this,mapMatrix[i][j],i,j,i,j,true));
+                    mFrame.addView(new TileView(mContext,mapMatrix[i][j],i,j,i,j,true));
                 }
             }
         }
@@ -84,7 +87,8 @@ public class GameActivity extends Activity {
                                     gb.movePlayer("LEFT");
 
                                     //flyt på skærm
-                                    mFrame.addView(new TileView(this,mapMatrix[i][j],i,j,i,j,true));
+                                    mFrame.addView(new TileView(mContext,mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
+                                            ,gb.getPlayerRow(),gb.getPlayerCol(),gb.getLastPos()[0],gb.getLastPos()[1],true));
                                 }
 
 

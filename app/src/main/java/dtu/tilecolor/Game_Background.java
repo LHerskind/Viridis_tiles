@@ -11,15 +11,15 @@ public class Game_Background {
     private char[][] mapMatrix;
     private int playerRow;
     private int playerCol;
-    private int[] lastPost = new int[2];
+    private int[] lastPos = new int[2];
 
 
     public Game_Background(char[][] mapMatrix){
         this.mapMatrix = mapMatrix;
         playerRow = getStartPosition()[0];
         playerCol = getStartPosition()[1];
-        lastPost[0] = playerRow;
-        lastPost[1]= playerCol;
+        lastPos[0] = playerRow;
+        lastPos[1]= playerCol;
 
     }
 
@@ -34,7 +34,7 @@ public class Game_Background {
         return new int[] {0,0};
     }
 
-    public void updateMap(int[] position){
+    public void updateMap(){
         if(mapMatrix[playerRow][playerCol] == 'r'){
             mapMatrix[playerRow][playerCol] = 'g';
         }else if(mapMatrix[playerRow][playerCol] == 'g'){
@@ -44,21 +44,25 @@ public class Game_Background {
 
     public void movePlayer(String direction){
 
-            updateMap(new int[] {playerRow,playerCol});
+            updateMap();
             if (direction.equals("UP")) {
                 Log.i("PlayerMove","UP");
+                lastPos[0] = playerRow;
                 playerRow--;
             }
             if (direction.equals("DOWN")) {
                 Log.i("PlayerMove","DOWN");
+                lastPos[0] = playerRow;
                 playerRow++;
             }
             if (direction.equals("LEFT")) {
                 Log.i("PlayerMove","LEFT");
+                lastPos[1] = playerCol;
                 playerCol--;
             }
             if (direction.equals("RIGHT")) {
                 Log.i("PlayerMove","RIGHT");
+                lastPos[1] = playerCol;
                 playerCol++;
 
         }
@@ -99,6 +103,18 @@ public class Game_Background {
     public char[][] getMapMatrix() {
 
         return mapMatrix;
+    }
+
+    public int[] getLastPos(){
+        return lastPos;
+    }
+
+    public int getPlayerRow(){
+        return playerRow;
+    }
+
+    public int getPlayerCol() {
+        return playerCol;
     }
 
     public int[] getPlayerTile() {
