@@ -88,7 +88,7 @@ public class GameActivity extends Activity {
 
                                     //flyt på skærm
                                     mFrame.addView(new TileView(mContext,mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
-                                            ,gb.getPlayerRow(),gb.getPlayerCol(),gb.getLastPos()[0],gb.getLastPos()[1],true));
+                                            ,gb.getPlayerRow(),gb.getPlayerCol(),gb.getLastPos()[0],gb.getLastPos()[1],false));
                                 }
 
 
@@ -97,6 +97,8 @@ public class GameActivity extends Activity {
                                     //swipe til højre, ryk brik til højre
                                     gb.movePlayer("RIGHT");
                                     //flyt på skærm
+                                    mFrame.addView(new TileView(mContext,mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
+                                            ,gb.getPlayerRow(),gb.getPlayerCol(),gb.getLastPos()[0],gb.getLastPos()[1],false));
                                 }
 
                             }
@@ -106,6 +108,8 @@ public class GameActivity extends Activity {
                                     //swipe op, ryk brik op
                                     gb.movePlayer("UP");
                                     //flyt på skærm
+                                    mFrame.addView(new TileView(mContext,mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
+                                            ,gb.getPlayerRow(),gb.getPlayerCol(),gb.getLastPos()[0],gb.getLastPos()[1],false));
                                 }
 
                             } else {
@@ -113,6 +117,8 @@ public class GameActivity extends Activity {
                                     //swipe ned, ryk brik ned
                                     gb.movePlayer("DOWN");
                                     //fly på skærm
+                                    mFrame.addView(new TileView(mContext,mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
+                                            ,gb.getPlayerRow(),gb.getPlayerCol(),gb.getLastPos()[0],gb.getLastPos()[1],false));
                                 }
 
                             }
