@@ -76,7 +76,7 @@ public class Game_Background {
         }if(direction.equals("LEFT")){
             return (mapMatrix[playerRow][playerCol-1] != 'w');
         }if(direction.equals("RIGHT")){
-            return (mapMatrix[playerRow][playerRow+1] != 'w');
+            return (mapMatrix[playerRow][playerCol+1] != 'w');
         }
         return false;
     }
