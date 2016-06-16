@@ -37,6 +37,7 @@ public class TileView extends View {
 
     }
 
+    //FUCK
     public TileView(Context context, char c, int i, int j){
         super(context);
         this.size = 100*3;
