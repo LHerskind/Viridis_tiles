@@ -80,7 +80,7 @@ public class GameActivity extends Activity {
                                            float velocityX, float velocityY) {
 
 
-                        if (velocityX > velocityY) {
+                        if (Math.abs(event1.getX()-event2.getX())>Math.abs(event1.getY()-event2.getY())) {
                             if (event1.getX() > event2.getX()) {
                                 if (gb.canMove("LEFT")) {
 
