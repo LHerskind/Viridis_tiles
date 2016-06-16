@@ -7,5 +7,4 @@
     android:id="@+id/gameframe"
     android:padding="10dp"
     >
-
 </RelativeLayout>
