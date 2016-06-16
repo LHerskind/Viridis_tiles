@@ -134,7 +134,6 @@ public class GameActivity extends Activity {
                             //fly på skærm
                             player.startSlide("DOWN");
                         }
-
                     }
                 }
                 if(gb.hasWon()){
