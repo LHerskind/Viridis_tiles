@@ -124,6 +124,15 @@ public class GameActivity extends Activity {
 
                             }
                         }
+                        if(gb.hasWon() || gb.hasLost()){
+                            String wonOrLost;
+                            if(gb.hasWon()){
+                                wonOrLost = "YOU WON!";
+                            }else{
+                                wonOrLost = "YOU LOST";
+                            }
+                            //TODO : Lav et fragment der popper op
+                        }
                         return true;
                     }
                 });
