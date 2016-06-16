@@ -11,12 +11,15 @@ public class Game_Background {
     private char[][] mapMatrix;
     private int playerRow;
     private int playerCol;
+    private int[] lastPost = new int[2];
 
 
     public Game_Background(char[][] mapMatrix){
         this.mapMatrix = mapMatrix;
         playerRow = getStartPosition()[0];
         playerCol = getStartPosition()[1];
+        lastPost[0] = playerRow;
+        lastPost[1]= playerCol;
 
     }
 
