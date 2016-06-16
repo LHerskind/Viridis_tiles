@@ -35,7 +35,7 @@ public class Game_Background {
     }
 
     public void updateMap(){
-        if(mapMatrix[playerRow][playerCol] == 'r'){
+        if(mapMatrix[playerRow][playerCol] == 'r' || mapMatrix[playerRow][playerCol] == 's'){
             mapMatrix[playerRow][playerCol] = 'g';
         }else if(mapMatrix[playerRow][playerCol] == 'g'){
             mapMatrix[playerRow][playerCol] = 'w';
@@ -45,24 +45,23 @@ public class Game_Background {
     public void movePlayer(String direction){
 
             updateMap();
+            lastPos[0] = playerRow;
+            lastPos[1] = playerCol;
+
             if (direction.equals("UP")) {
                 Log.i("PlayerMove","UP");
-                lastPos[0] = playerRow;
                 playerRow--;
             }
             if (direction.equals("DOWN")) {
                 Log.i("PlayerMove","DOWN");
-                lastPos[0] = playerRow;
                 playerRow++;
             }
             if (direction.equals("LEFT")) {
                 Log.i("PlayerMove","LEFT");
-                lastPos[1] = playerCol;
                 playerCol--;
             }
             if (direction.equals("RIGHT")) {
                 Log.i("PlayerMove","RIGHT");
-                lastPos[1] = playerCol;
                 playerCol++;
 
         }
