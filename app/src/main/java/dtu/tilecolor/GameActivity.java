@@ -137,7 +137,9 @@ public class GameActivity extends Activity {
                     }
                 }
                 if(gb.hasWon()){
-                    Toast.makeText(mContext, "Du vandt din fede idiot", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "Du vandt din fede idiot", Toast.LENGTH_SHORT).show();
+                } else if(gb.hasLost()){
+                    Toast.makeText(mContext, "Du er en kæmpe taber", Toast.LENGTH_SHORT).show();
                 }
 
                 return true;
