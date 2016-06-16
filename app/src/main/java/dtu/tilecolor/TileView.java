@@ -7,6 +7,10 @@ import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by Meowasaurus on 14-06-2016.
  */
@@ -14,67 +18,98 @@ public class TileView extends View {
 
     private final Paint mPaint = new Paint();
     private char c;
-    private int i;
-    private int j;
     private int i2;
     private int j2;
     private int size;
     private int size2;
     private boolean isPlayer = false;
     private boolean isStart;
+    private int padding;
 
-    public TileView(Context context, char c, int i, int j, int i2, int j2, boolean isStart){
-        super(context);
-        this.size = 100*3;
-        this.size2 = 86*3;
-        this.c=c;
-        this.i=i;
-        this.j=j;
-        this.i2=i2;
-        this.j2=j2;
-        this.isPlayer=true;
-        this.isStart=isStart;
-
-    }
-
-    //FUCK
-    public TileView(Context context, char c, int i, int j){
-        super(context);
-        this.size = 100*3;
-        this.c=c;
-        this.i=i;
-        this.j=j;
-    }
+    private int x;
+    private int y;
+    private int x2;
+    private int y2;
 
     public TileView(Context context, char c, int i, int j, int size){
-        this(context,c,i,j);
+        super(context);
         this.size = size;
+        this.padding = size/10;
+        this.c=c;
+        x = size * (j - 1);
+        y = size * (i - 1);
     }
 
+    public TileView(Context context, char c, int i, int j, int i2, int j2, boolean isStart, int size){
+        super(context);
+        this.padding = size/10;
+        this.size = size;
+        this.size2 = (int)(size*0.86);
+        this.c = c;
+        x = size * (j - 1) + (size-size2)/2;
+        y =  (size * (i - 1) + (size-size2)/2);
+        x2 = size * (j2 - 1);
+        y2 = size * (i2 - 1);
+        this.isPlayer=true;
+        this.isStart=isStart;
+    }
+
+
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        if(isPlayer){
+    protected synchronized void onDraw(Canvas canvas) {
+        //super.onDraw(canvas);
+        canvas.save();
+        if(!isPlayer){
+            setColor(c);
+            canvas.drawRect(x, y, x + (size - padding), y + (size - padding), mPaint);
+        }else {
             mPaint.setColor(Color.BLUE);
-            int padding = size / 10;
-            int x = size * (j - 1) + (size-size2)/2;
-            int y =  (size * (i - 1) + (size-size2)/2);
             canvas.drawRect(x, y, x + (size2 - padding), y + (size2 - padding), mPaint);
             if(!isStart) {
                 setColor(c);
-                padding = size / 10;
-                x = size * (j2 - 1);
-                y = size * (i2 - 1);
-                canvas.drawRect(x, y, x + (size - padding), y + (size - padding), mPaint);
+                canvas.drawRect(x2, y2, x2 + (size - padding), y2 + (size - padding), mPaint);
                 isPlayer = false;
             }
-        }else {
-            setColor(c);
-            int padding = size / 10;
-            int x = size * (j - 1);
-            int y = size * (i - 1);
-            canvas.drawRect(x, y, x + (size - padding), y + (size - padding), mPaint);
         }
+        canvas.restore();
+    }
+
+    private int moved;
+    public void startSlide(final String direction) {
+        if (isPlayer){
+        final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+            moved = 0;
+        executor.scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+                int velocity = size/5;
+                if(moved >= size-velocity){
+                    executor.shutdown();
+                }
+                moved += velocity;
+                slide(direction,velocity);
+            }
+        }, 0, 25, TimeUnit.MILLISECONDS);
+        }
+
+    }
+
+    private synchronized void slide(String direction, int velocity){
+        if(direction.equals("RIGHT")) {
+            x+= velocity;
+        } else if (direction.equals("LEFT")) {
+            x-= velocity;
+        } else if (direction.equals("UP")) {
+            y-= velocity;
+        } else if (direction.equals("DOWN")) {
+            y+= velocity;
+        }
+        this.postInvalidate();
+    }
+
+
+    public void setChar(char c){
+        this.c = c;
     }
 
 

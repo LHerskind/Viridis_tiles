@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 /**
  * Created by Meowasaurus on 14-06-2016.
@@ -17,12 +20,14 @@ public class GameActivity extends Activity {
 
     private RelativeLayout mFrame;
     private Bitmap mBitmap;
-    private int mDisplayWidth,mDisplayHeight;
+    private int mDisplayWidth, mDisplayHeight;
     private GestureDetector mGestureDetector;
     private Game_Background gb;
     private char[][] mapMatrix;
+    private TileView[][] tileMatrix;
     private Context mContext;
-
+    private int size;
+    private TileView player;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,19 +38,25 @@ public class GameActivity extends Activity {
         Intent intent = getIntent();
         mContext = this;
         mapMatrix = (char[][]) intent.getExtras().getSerializable("map");
-        gb = new Game_Background(mapMatrix);
 
         mFrame = (RelativeLayout) findViewById(R.id.gameframe);
 
-
-        for(int i = 1; i < mapMatrix.length-1;i++){
-            for(int j = 1; j < mapMatrix[i].length-1; j++){
-                mFrame.addView(new TileView(mContext,mapMatrix[i][j],i,j));
-                if(mapMatrix[i][j]=='s'){
-                    mFrame.addView(new TileView(mContext,mapMatrix[i][j],i,j,i,j,true));
+        Display display = getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        display.getSize(point);
+        size = (point.x - 20) / 5;
+        tileMatrix = new TileView[mapMatrix.length][mapMatrix[1].length];
+        for (int i = 1; i < mapMatrix.length - 1; i++) {
+            for (int j = 1; j < mapMatrix[i].length - 1; j++) {
+                tileMatrix[i][j]= new TileView(mContext, mapMatrix[i][j], i, j, size);
+                mFrame.addView(tileMatrix[i][j]);
+                if (mapMatrix[i][j] == 's') {
+                    player = new TileView(mContext, mapMatrix[i][j], i, j, i, j, true, size);
                 }
             }
         }
+        mFrame.addView(player);
+        gb = new Game_Background(mapMatrix, tileMatrix);
     }
 
     @Override
@@ -53,7 +64,8 @@ public class GameActivity extends Activity {
         //TODO - lyd
         super.onResume();
         setupGestureDetector();
-   }
+    }
+
     @Override
     protected void onPause() {
         //TODO - lyd
@@ -75,58 +87,59 @@ public class GameActivity extends Activity {
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
 
 
-                    @Override
-                    public boolean onFling(MotionEvent event1, MotionEvent event2,
-                                           float velocityX, float velocityY) {
+            @Override
+            public boolean onFling(MotionEvent event1, MotionEvent event2,
+                                   float velocityX, float velocityY) {
 
 
-                        if (Math.abs(event1.getX()-event2.getX())>Math.abs(event1.getY()-event2.getY())) {
-                            if (event1.getX() > event2.getX()) {
-                                if (gb.canMove("LEFT")) {
+                if (Math.abs(event1.getX() - event2.getX()) > Math.abs(event1.getY() - event2.getY())) {
+                    if (event1.getX() > event2.getX()) {
+                        if (gb.canMove("LEFT")) {
 
-                                    //swipe til venstre, ryk brik til venstre
-                                    gb.movePlayer("LEFT");
+                            //swipe til venstre, ryk brik til venstre
+                            gb.movePlayer("LEFT");
+                            tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
+                            player.startSlide("LEFT");
 
-                                    //flyt på skærm
-                                    mFrame.addView(new TileView(mContext, mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
-                                            , gb.getPlayerRow(), gb.getPlayerCol(), gb.getLastPos()[0], gb.getLastPos()[1], false));
-                                }
-
-
-                            } else {
-                                if (gb.canMove("RIGHT")) {
-                                    //swipe til højre, ryk brik til højre
-                                    gb.movePlayer("RIGHT");
-                                    //flyt på skærm
-                                    mFrame.addView(new TileView(mContext, mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
-                                            , gb.getPlayerRow(), gb.getPlayerCol(), gb.getLastPos()[0], gb.getLastPos()[1], false));
-                                }
-                            }
-                        } else{
-
-                            if (event1.getY() > event2.getY()) {
-                                if(gb.canMove("UP")){
-                                    //swipe op, ryk brik op
-                                    gb.movePlayer("UP");
-                                    //flyt på skærm
-                                    mFrame.addView(new TileView(mContext,mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
-                                            ,gb.getPlayerRow(),gb.getPlayerCol(),gb.getLastPos()[0],gb.getLastPos()[1],false));
-                                }
-
-                            } else {
-                                if(gb.canMove("DOWN")){
-                                    //swipe ned, ryk brik ned
-                                    gb.movePlayer("DOWN");
-                                    //fly på skærm
-                                    mFrame.addView(new TileView(mContext,mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
-                                            ,gb.getPlayerRow(),gb.getPlayerCol(),gb.getLastPos()[0],gb.getLastPos()[1],false));
-                                }
-
-                            }
+                            //flyt på skærm
                         }
-                        return true;
+
+
+                    } else {
+                        if (gb.canMove("RIGHT")) {
+                            //swipe til højre, ryk brik til højre
+                            gb.movePlayer("RIGHT");
+                            tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
+                            //flyt på skærm
+                            player.startSlide("RIGHT");
+                        }
                     }
-                });
+                } else {
+
+                    if (event1.getY() > event2.getY()) {
+                        if (gb.canMove("UP")) {
+                            //swipe op, ryk brik op
+                            gb.movePlayer("UP");
+                            tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
+                            //flyt på skærm
+                            player.startSlide("UP");
+                        }
+
+                    } else {
+                        if (gb.canMove("DOWN")) {
+                            //swipe ned, ryk brik ned
+                            gb.movePlayer("DOWN");
+                            tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
+                            //fly på skærm
+                            player.startSlide("DOWN");
+                        }
+
+                    }
+                }
+
+                return true;
+            }
+        });
     }
 
 
@@ -134,8 +147,6 @@ public class GameActivity extends Activity {
     public boolean onTouchEvent(MotionEvent event) {
         return mGestureDetector.onTouchEvent(event);
     }
-
-
 
 
 }

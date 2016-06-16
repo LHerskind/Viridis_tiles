@@ -9,18 +9,19 @@ public class Game_Background {
 
 
     private char[][] mapMatrix;
+    private TileView[][] tileMatrix;
     private int playerRow;
     private int playerCol;
     private int[] lastPos = new int[2];
 
 
-    public Game_Background(char[][] mapMatrix){
+    public Game_Background(char[][] mapMatrix, TileView[][] tileMatrix){
         this.mapMatrix = mapMatrix;
+        this.tileMatrix = tileMatrix;
         playerRow = getStartPosition()[0];
         playerCol = getStartPosition()[1];
         lastPos[0] = playerRow;
         lastPos[1]= playerCol;
-
     }
 
     private int[] getStartPosition() {
@@ -37,8 +38,10 @@ public class Game_Background {
     public void updateMap(){
         if(mapMatrix[playerRow][playerCol] == 'r' || mapMatrix[playerRow][playerCol] == 's'){
             mapMatrix[playerRow][playerCol] = 'g';
+            tileMatrix[playerRow][playerCol].setChar('g');
         }else if(mapMatrix[playerRow][playerCol] == 'g'){
             mapMatrix[playerRow][playerCol] = 'w';
+            tileMatrix[playerRow][playerCol].setChar('w');
         }
     }
 
@@ -49,26 +52,21 @@ public class Game_Background {
             lastPos[1] = playerCol;
 
             if (direction.equals("UP")) {
-                Log.i("PlayerMove","UP");
                 playerRow--;
             }
             if (direction.equals("DOWN")) {
-                Log.i("PlayerMove","DOWN");
                 playerRow++;
             }
             if (direction.equals("LEFT")) {
-                Log.i("PlayerMove","LEFT");
                 playerCol--;
             }
             if (direction.equals("RIGHT")) {
-                Log.i("PlayerMove","RIGHT");
                 playerCol++;
 
         }
     }
 
     public boolean canMove(String direction){
-        Log.i("PlayerMove","canMove");
         if(direction.equals("UP")){
             return (mapMatrix[playerRow-1][playerCol] != 'w');
         }if(direction.equals("DOWN")){
@@ -76,7 +74,7 @@ public class Game_Background {
         }if(direction.equals("LEFT")){
             return (mapMatrix[playerRow][playerCol-1] != 'w');
         }if(direction.equals("RIGHT")){
-            return (mapMatrix[playerRow][playerRow+1] != 'w');
+            return (mapMatrix[playerRow][playerCol+1] != 'w');
         }
         return false;
     }

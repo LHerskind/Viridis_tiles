@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:background="@color/dark_background"
     tools:context="dtu.tilecolor.FullscreenActivity"
-    android:id="@+id/gameframe" >
+    android:id="@+id/gameframe"
+    android:padding="10dp"
+    >
 
 </RelativeLayout>

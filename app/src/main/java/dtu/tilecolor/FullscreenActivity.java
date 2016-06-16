@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,14 +94,19 @@ public class FullscreenActivity extends AppCompatActivity {
 
             char[][] mapMatrix = item.getMap();
 
+            int size = parent.getWidth() /16;
             for(int i = 1; i < mapMatrix.length-1;i++){
                 for(int j = 1; j < mapMatrix[i].length-1; j++){
-                    mFrame.addView(new TileView(mContext,mapMatrix[i][j],i,j,25));
+                    mFrame.addView(new TileView(mContext,mapMatrix[i][j],i,j,i,j,false,size));
+                    if(mapMatrix[i][j]=='s'){
+                        mFrame.addView(new TileView(mContext,mapMatrix[i][j],i,j,i,j,true,size));
+                    }
                 }
             }
             mFrame.invalidate();
             convertView.invalidate();
-            mFrame.setMinimumHeight(25*(mapMatrix.length-2) );
+            mFrame.setMinimumHeight(size*(mapMatrix.length-2) );
+
 
             return convertView;
         }

@@ -18,6 +18,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/littleframe"
         >
+        <!--    Todo
+         Center that shit
+        -->
     </RelativeLayout>
 
         <LinearLayout
