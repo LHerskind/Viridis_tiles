@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="INSERT TEXT HERE"
+        android:text="Insert text"
         android:layout_alignParentEnd="false"
         android:layout_alignParentStart="false"
         android:layout_centerInParent="true"
@@ -33,6 +33,15 @@
         android:id="@+id/menuFragmentButton"
         android:layout_alignBottom="@+id/winLoseText"
         android:layout_alignEnd="@+id/winLoseText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:id="@+id/nextLevel"
+        android:layout_alignTop="@+id/winLoseText"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible" />
 
 
 </RelativeLayout>

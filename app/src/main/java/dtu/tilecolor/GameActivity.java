@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -138,13 +140,25 @@ public class GameActivity extends Activity {
                 }
                 if(gb.hasWon()){
                     WinLoseFragment newFragment = new WinLoseFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("text", "You won");
+                    bundle.putBoolean("won", true);
+                    newFragment.setArguments(bundle);
+
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.gameframe, newFragment);
                     transaction.addToBackStack(null);
-
                     transaction.commit();
                 } else if(gb.hasLost()){
-                    Toast.makeText(mContext, "Du er en kæmpe taber", Toast.LENGTH_SHORT).show();
+                    WinLoseFragment newFragment = new WinLoseFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("text", "You lost");
+                    bundle.putBoolean("won", false);
+                    newFragment.setArguments(bundle);
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.gameframe, newFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                 }
 
                 return true;
