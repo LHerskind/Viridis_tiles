@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 /**
@@ -17,22 +18,29 @@ public class GameActivity extends Activity {
     private Bitmap mBitmap;
     private int mDisplayWidth,mDisplayHeight;
     private GestureDetector mGestureDetector;
-
+    private Game_Background gb;
     private char[][] mapMatrix;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.gamelayout);
         Intent intent = getIntent();
         mapMatrix = (char[][]) intent.getExtras().getSerializable("map");
+        gb = new Game_Background(mapMatrix);
 
         mFrame = (RelativeLayout) findViewById(R.id.gameframe);
+
 
         for(int i = 1; i < mapMatrix.length-1;i++){
             for(int j = 1; j < mapMatrix[i].length-1; j++){
                 mFrame.addView(new TileView(this,mapMatrix[i][j],i,j));
+                if(mapMatrix[i][j]=='s'){
+                    mFrame.addView(new TileView(this,mapMatrix[i][j],i,j,i,j,true));
+                }
             }
         }
     }
@@ -41,6 +49,7 @@ public class GameActivity extends Activity {
     protected void onResume() {
         //TODO - lyd
         super.onResume();
+        setupGestureDetector();
    }
     @Override
     protected void onPause() {
@@ -66,21 +75,44 @@ public class GameActivity extends Activity {
                     @Override
                     public boolean onFling(MotionEvent event1, MotionEvent event2,
                                            float velocityX, float velocityY) {
-                    /*
+
                         if (velocityX > velocityY) {
                             if (event1.getX() > event2.getX()) {
-                                //TODO
-                                //swipe til venstre, ryk brik til venstre
+                                if(gb.canMove("LEFT")){
+
+                                    //swipe til venstre, ryk brik til venstre
+                                    gb.movePlayer("LEFT");
+
+                                    //flyt på skærm
+                                    mFrame.addView(new TileView(this,mapMatrix[i][j],i,j,i,j,true));
+                                }
+
+
                             } else {
-                                //swipe til højre, ryk brik til højre
+                                if(gb.canMove("RIGHT")){
+                                    //swipe til højre, ryk brik til højre
+                                    gb.movePlayer("RIGHT");
+                                    //flyt på skærm
+                                }
+
                             }
 
                             if (event1.getY() > event2.getY()) {
-                                //swipe op, ryk brik op
+                                if(gb.canMove("UP")){
+                                    //swipe op, ryk brik op
+                                    gb.movePlayer("UP");
+                                    //flyt på skærm
+                                }
+
                             } else {
-                                //swipe ned, ryk brik ned
+                                if(gb.canMove("DOWN")){
+                                    //swipe ned, ryk brik ned
+                                    gb.movePlayer("DOWN");
+                                    //fly på skærm
+                                }
+
                             }
-                        }*/
+                        }
                         return true;
                     }
                 });
