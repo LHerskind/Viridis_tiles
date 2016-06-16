@@ -10,11 +10,8 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Meowasaurus on 14-06-2016.
@@ -51,7 +48,7 @@ public class GameActivity extends Activity {
         tileMatrix = new TileView[mapMatrix.length][mapMatrix[1].length];
         for (int i = 1; i < mapMatrix.length - 1; i++) {
             for (int j = 1; j < mapMatrix[i].length - 1; j++) {
-                tileMatrix[i][j]= new TileView(mContext, mapMatrix[i][j], i, j, size);
+                tileMatrix[i][j] = new TileView(mContext, mapMatrix[i][j], i, j, size);
                 mFrame.addView(tileMatrix[i][j]);
                 if (mapMatrix[i][j] == 's') {
                     player = new TileView(mContext, mapMatrix[i][j], i, j, i, j, true, size);
@@ -64,103 +61,71 @@ public class GameActivity extends Activity {
 
     @Override
     protected void onResume() {
-        //TODO - lyd
         super.onResume();
         setupGestureDetector();
     }
 
     @Override
     protected void onPause() {
-        //TODO - lyd
         super.onPause();
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            mDisplayWidth = mFrame.getWidth();
-            mDisplayHeight = mFrame.getHeight();
-
-        }
-    }
-
     private void setupGestureDetector() {
-
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
-
-
             @Override
-            public boolean onFling(MotionEvent event1, MotionEvent event2,
-                                   float velocityX, float velocityY) {
-
-
-                if (Math.abs(event1.getX() - event2.getX()) > Math.abs(event1.getY() - event2.getY())) {
-                    if (event1.getX() > event2.getX()) {
-                        if (gb.canMove("LEFT")) {
-
-                            //swipe til venstre, ryk brik til venstre
-                            gb.movePlayer("LEFT");
-                            tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
-                            player.startSlide("LEFT");
-
-                            //flyt på skærm
+            public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
+                if (player.isReady()) {
+                    if (Math.abs(event1.getX() - event2.getX()) > Math.abs(event1.getY() - event2.getY())) {
+                        if (event1.getX() > event2.getX()) {
+                            if (gb.canMove("LEFT")) {
+                                gb.movePlayer("LEFT");
+                                tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
+                                player.startSlide("LEFT");
+                            }
+                        } else {
+                            if (gb.canMove("RIGHT")) {
+                                gb.movePlayer("RIGHT");
+                                tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
+                                player.startSlide("RIGHT");
+                            }
                         }
-
-
                     } else {
-                        if (gb.canMove("RIGHT")) {
-                            //swipe til højre, ryk brik til højre
-                            gb.movePlayer("RIGHT");
-                            tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
-                            //flyt på skærm
-                            player.startSlide("RIGHT");
+                        if (event1.getY() > event2.getY()) {
+                            if (gb.canMove("UP")) {
+                                gb.movePlayer("UP");
+                                tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
+                                player.startSlide("UP");
+                            }
+                        } else {
+                            if (gb.canMove("DOWN")) {
+                                gb.movePlayer("DOWN");
+                                tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
+                                player.startSlide("DOWN");
+                            }
                         }
                     }
-                } else {
-
-                    if (event1.getY() > event2.getY()) {
-                        if (gb.canMove("UP")) {
-                            //swipe op, ryk brik op
-                            gb.movePlayer("UP");
-                            tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
-                            //flyt på skærm
-                            player.startSlide("UP");
-                        }
-
-                    } else {
-                        if (gb.canMove("DOWN")) {
-                            //swipe ned, ryk brik ned
-                            gb.movePlayer("DOWN");
-                            tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
-                            //fly på skærm
-                            player.startSlide("DOWN");
-                        }
+                    if (gb.hasWon()) {
+                        WinLoseFragment newFragment = new WinLoseFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("text", "You won");
+                        bundle.putBoolean("won", true);
+                        newFragment.setArguments(bundle);
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.gameframe, newFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    } else if (gb.hasLost()) {
+                        WinLoseFragment newFragment = new WinLoseFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("text", "You lost");
+                        bundle.putBoolean("won", false);
+                        newFragment.setArguments(bundle);
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.gameframe, newFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
                     }
                 }
-                if(gb.hasWon()){
-                    WinLoseFragment newFragment = new WinLoseFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("text", "You won");
-                    bundle.putBoolean("won", true);
-                    newFragment.setArguments(bundle);
-
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.gameframe, newFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                } else if(gb.hasLost()){
-                    WinLoseFragment newFragment = new WinLoseFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("text", "You lost");
-                    bundle.putBoolean("won", false);
-                    newFragment.setArguments(bundle);
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.gameframe, newFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                }
-
                 return true;
             }
         });

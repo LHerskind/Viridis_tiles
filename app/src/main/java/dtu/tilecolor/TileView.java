@@ -74,6 +74,7 @@ public class TileView extends View {
         canvas.restore();
     }
 
+    private boolean isReady = true;
     private int moved;
     public void startSlide(final String direction) {
         if (isPlayer){
@@ -82,16 +83,22 @@ public class TileView extends View {
         executor.scheduleWithFixedDelay(new Runnable() {
             @Override
             public void run() {
-                int velocity = size/5;
-                if(moved >= size-velocity){
+                isReady = false;
+                int velocity = size/50;
+                if(moved >= size){
+                    isReady = true;
                     executor.shutdown();
+                } else {
+                    moved += velocity;
+                    slide(direction, velocity);
                 }
-                moved += velocity;
-                slide(direction,velocity);
             }
-        }, 0, 25, TimeUnit.MILLISECONDS);
+        }, 0, 5, TimeUnit.MILLISECONDS);
         }
+    }
 
+    public boolean isReady(){
+        return isReady;
     }
 
     private synchronized void slide(String direction, int velocity){

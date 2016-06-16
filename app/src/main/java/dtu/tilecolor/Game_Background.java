@@ -7,7 +7,6 @@ import android.util.Log;
  */
 public class Game_Background {
 
-
     private char[][] mapMatrix;
     private TileView[][] tileMatrix;
     private int playerRow;
