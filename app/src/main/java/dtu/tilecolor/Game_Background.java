@@ -1,12 +1,14 @@
 package dtu.tilecolor;
 
+import android.util.Log;
+
 /**
  * Created by matiasdaugaard on 14/06/16.
  */
 public class Game_Background {
 
 
-    private char[][] mapMatrix = {{'w','w','w','w'},{'w','s','r','w'},{'w','w','w','w'}};
+    private char[][] mapMatrix;
     private int playerRow;
     private int playerCol;
 
@@ -38,18 +40,29 @@ public class Game_Background {
     }
 
     public void movePlayer(String direction){
-        if(direction.equals("UP")){
-            playerRow--;
-        }if(direction.equals("DOWN")){
-            playerRow++;
-        }if(direction.equals("LEFT")){
-           playerCol--;
-        }if(direction.equals("RIGHT")){
-           playerCol++;
+
+            updateMap(new int[] {playerRow,playerCol});
+            if (direction.equals("UP")) {
+                Log.i("PlayerMove","UP");
+                playerRow--;
+            }
+            if (direction.equals("DOWN")) {
+                Log.i("PlayerMove","DOWN");
+                playerRow++;
+            }
+            if (direction.equals("LEFT")) {
+                Log.i("PlayerMove","LEFT");
+                playerCol--;
+            }
+            if (direction.equals("RIGHT")) {
+                Log.i("PlayerMove","RIGHT");
+                playerCol++;
+
         }
     }
 
     public boolean canMove(String direction){
+        Log.i("PlayerMove","canMove");
         if(direction.equals("UP")){
             return (mapMatrix[playerRow-1][playerCol] != 'w');
         }if(direction.equals("DOWN")){

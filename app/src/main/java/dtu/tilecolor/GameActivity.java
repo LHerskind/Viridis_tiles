@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
@@ -19,24 +17,22 @@ public class GameActivity extends Activity {
     private Bitmap mBitmap;
     private int mDisplayWidth,mDisplayHeight;
     private GestureDetector mGestureDetector;
-    //private char[][] mapMatrix = {{'w','w','w','w'},{'w','s','r','w'},{'w','w','w','w'}};
 
     private char[][] mapMatrix;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("TAG", "PIS OG FUCKING LORT");
 
-        setContentView(R.layout.main);
+        setContentView(R.layout.gamelayout);
         Intent intent = getIntent();
         mapMatrix = (char[][]) intent.getExtras().getSerializable("map");
 
-        mFrame = (RelativeLayout) findViewById(R.id.frame);
+        mFrame = (RelativeLayout) findViewById(R.id.gameframe);
 
         for(int i = 1; i < mapMatrix.length-1;i++){
             for(int j = 1; j < mapMatrix[i].length-1; j++){
-                mFrame.addView(new tileView(this,mapMatrix[i][j],i,j));
+                mFrame.addView(new TileView(this,mapMatrix[i][j],i,j));
             }
         }
     }
@@ -51,7 +47,6 @@ public class GameActivity extends Activity {
         //TODO - lyd
         super.onPause();
     }
-
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

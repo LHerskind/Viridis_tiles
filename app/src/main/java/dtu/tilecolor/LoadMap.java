@@ -23,6 +23,8 @@ public class LoadMap {
 
         row = scanner.nextInt();
         col = scanner.nextInt();
+        Log.i("LoadMap", ""+row+" "+col);
+
         map = "";
 
         while(scanner.hasNextLine()){
@@ -30,18 +32,13 @@ public class LoadMap {
         }
 
         mapArray = new char[row][col];
-        for(int i=0; i < row; i++) {
-            for(int j =0; j < col; j++) {
-                mapArray[i][j] = map.charAt(i*row+j);
+        for(int i=0, k=0; i < row; i++) {
+            for(int j=0; j < col; j++, k++) {
+                mapArray[i][j] = map.charAt(k);
             }
         }
     }
-
     public char[][] getMap() {
         return mapArray;
     }
-    public String getMapString(){ return map;}
-    public int getCol() { return col; }
-    public int getRow() { return row; }
-
 }

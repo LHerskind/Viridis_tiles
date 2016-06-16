@@ -10,16 +10,15 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/dark_background"
+        android:padding="5dp"
         >
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/viridis_launcher"
-        android:layout_gravity="center"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/littleframe"
         >
-    </ImageView>
+    </RelativeLayout>
 
         <LinearLayout
             android:orientation="vertical"
