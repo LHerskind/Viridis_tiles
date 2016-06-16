@@ -2,6 +2,7 @@ package dtu.tilecolor;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -28,12 +29,23 @@ public class WinLoseFragment extends Fragment {
         String text = arguments.getString("text");
 
         TextView textView = (TextView) view.findViewById(R.id.winLoseText);
-        Button button = (Button) view.findViewById(R.id.nextLevel);
+        Button next = (Button) view.findViewById(R.id.nextLevel);
+        Button restart = (Button) view.findViewById(R.id.buttonRestart);
+        Button menu = (Button) view.findViewById(R.id.menuFragmentButton);
 
         textView.setText(text);
 
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FullscreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         if(!won){
-            button.setVisibility(View.GONE);
+            next.setVisibility(View.GONE);
         }
 
 

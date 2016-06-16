@@ -70,11 +70,12 @@ public class GameActivity extends Activity {
         super.onPause();
     }
 
+    private boolean alreadyWon = false;
     private void setupGestureDetector() {
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
-                if (player.isReady()) {
+                if (player.isReady() && !alreadyWon) {
                     if (Math.abs(event1.getX() - event2.getX()) > Math.abs(event1.getY() - event2.getY())) {
                         if (event1.getX() > event2.getX()) {
                             if (gb.canMove("LEFT")) {
@@ -105,6 +106,7 @@ public class GameActivity extends Activity {
                         }
                     }
                     if (gb.hasWon()) {
+                        alreadyWon=true;
                         WinLoseFragment newFragment = new WinLoseFragment();
                         Bundle bundle = new Bundle();
                         bundle.putString("text", "You won");
