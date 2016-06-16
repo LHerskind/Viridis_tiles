@@ -136,6 +136,9 @@ public class GameActivity extends Activity {
 
                     }
                 }
+                if(gb.hasWon()){
+                    Toast.makeText(mContext, "Du vandt din fede idiot", Toast.LENGTH_LONG).show();
+                }
 
                 return true;
             }
