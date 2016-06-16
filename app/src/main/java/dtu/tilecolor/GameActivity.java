@@ -79,29 +79,30 @@ public class GameActivity extends Activity {
                     public boolean onFling(MotionEvent event1, MotionEvent event2,
                                            float velocityX, float velocityY) {
 
+
                         if (velocityX > velocityY) {
                             if (event1.getX() > event2.getX()) {
-                                if(gb.canMove("LEFT")){
+                                if (gb.canMove("LEFT")) {
 
                                     //swipe til venstre, ryk brik til venstre
                                     gb.movePlayer("LEFT");
 
                                     //flyt på skærm
-                                    mFrame.addView(new TileView(mContext,mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
-                                            ,gb.getPlayerRow(),gb.getPlayerCol(),gb.getLastPos()[0],gb.getLastPos()[1],false));
+                                    mFrame.addView(new TileView(mContext, mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
+                                            , gb.getPlayerRow(), gb.getPlayerCol(), gb.getLastPos()[0], gb.getLastPos()[1], false));
                                 }
 
 
                             } else {
-                                if(gb.canMove("RIGHT")){
+                                if (gb.canMove("RIGHT")) {
                                     //swipe til højre, ryk brik til højre
                                     gb.movePlayer("RIGHT");
                                     //flyt på skærm
-                                    mFrame.addView(new TileView(mContext,mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
-                                            ,gb.getPlayerRow(),gb.getPlayerCol(),gb.getLastPos()[0],gb.getLastPos()[1],false));
+                                    mFrame.addView(new TileView(mContext, mapMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]]
+                                            , gb.getPlayerRow(), gb.getPlayerCol(), gb.getLastPos()[0], gb.getLastPos()[1], false));
                                 }
-
                             }
+                        } else{
 
                             if (event1.getY() > event2.getY()) {
                                 if(gb.canMove("UP")){
