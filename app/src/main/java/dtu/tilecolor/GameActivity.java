@@ -5,31 +5,17 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
-import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import org.w3c.dom.Text;
-
-import java.util.Calendar;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Meowasaurus on 14-06-2016.
@@ -47,12 +33,13 @@ public class GameActivity extends Activity {
     private Context mContext;
     private int size;
     private TileView player;
-    private boolean isPressed = false;
     private boolean timeRunning = false;
     private int steps = 1;
+    private int timeSpent;
     private boolean ended = false;
     private Button restart;
     private Button music;
+    private MenuItem item;
 
 
     @Override
@@ -63,7 +50,9 @@ public class GameActivity extends Activity {
         setContentView(R.layout.gamelayout);
         Intent intent = getIntent();
         mContext = getApplicationContext();
-        mapMatrix = (char[][]) intent.getExtras().getSerializable("map");
+        Bundle bundle = intent.getExtras();
+        item = (MenuItem) bundle.getSerializable("item");
+        mapMatrix = item.getMap();
 
         mFrame = (RelativeLayout) findViewById(R.id.gameframe);
         mTextFrame = (RelativeLayout) findViewById(R.id.gametextframe);
@@ -97,7 +86,6 @@ public class GameActivity extends Activity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isPressed = true;
                 recreate();
             }
         });
@@ -105,7 +93,6 @@ public class GameActivity extends Activity {
         music.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isPressed = true;
                 Intent musicIntent = new Intent(GameActivity.this, MusicOptions.class);
                 startActivity(musicIntent);
             }
@@ -182,6 +169,9 @@ public class GameActivity extends Activity {
         WinLoseFragment winLoseFragment = new WinLoseFragment();
         Bundle bundle = new Bundle();
         if (won) {
+            item.setSteps(steps);
+            item.setTime(timeSpent);
+            new LoadMenuItems(mContext).update(item);
             bundle.putString("text", "You won");
             bundle.putBoolean("won", true);
         } else {
@@ -198,16 +188,18 @@ public class GameActivity extends Activity {
     private void startTime() {
         Thread th = new Thread(new Runnable() {
             private long startTime = System.currentTimeMillis();
+
             public void run() {
                 while (timeRunning) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            timeView.setText("" + ((System.currentTimeMillis() - startTime) / 1000) + ":" + ((System.currentTimeMillis() - startTime) / 100) % 10);
+                            timeSpent = (int) ((System.currentTimeMillis()-startTime)/1000);
+                            timeView.setText("" +timeSpent);
                         }
                     });
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

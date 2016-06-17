@@ -28,8 +28,8 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
         TextView numberOfSteps = (TextView) convertView.findViewById(R.id.steps);
         TextView timeToComplete = (TextView) convertView.findViewById(R.id.timeToComplete);
 
-        numberOfSteps.setText(item.getSteps());
-        timeToComplete.setText(item.getTime());
+        numberOfSteps.setText(""+item.getSteps());
+        timeToComplete.setText(""+item.getTime());
 
         RelativeLayout mFrame = (RelativeLayout) convertView.findViewById(R.id.littleframe);
 

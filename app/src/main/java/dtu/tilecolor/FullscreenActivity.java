@@ -19,13 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
 public class FullscreenActivity extends AppCompatActivity {
 
-    private View mContentView;
     private Context mContext;
 
     @Override
@@ -35,21 +30,10 @@ public class FullscreenActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mContext = getApplicationContext();
-        // mContentView = findViewById(R.id.fullscreen_content);
 
         final GridView gridView = (GridView) findViewById(R.id.gridview);
 
-        ArrayList<MenuItem> values = new ArrayList<MenuItem>();
-
-        for(int i = 0; i < 1; i++){
-            try {
-                LoadMap loadmap = new LoadMap(mContext, "maps/map2.txt");
-                char[][] map = loadmap.getMap();
-                values.add(new MenuItem("0:"+i,""+i,map));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        ArrayList<MenuItem> values = new LoadMenuItems(mContext).getLoadedList();
 
         MenuItemAdapter adapter = new MenuItemAdapter (this, values);
 
@@ -59,16 +43,14 @@ public class FullscreenActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 MenuItem item = (MenuItem) parent.getItemAtPosition(position);
                 // Når vi skal opdatere hvordan det ser ud, brug adapter.notifyDataSetChanged();
-                try {
-                    LoadMap loadmap = new LoadMap(mContext, "maps/map2.txt");
+                    //LoadMap loadmap = new LoadMap(mContext, "maps/map2.txt");
                     Intent intent = new Intent(mContext, GameActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("map",loadmap.getMap());
+                //    bundle.putSerializable("map",item.getMap());
+                    bundle.putSerializable("item",item);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
             }
         });
     }
