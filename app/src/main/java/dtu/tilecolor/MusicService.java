@@ -1,10 +1,14 @@
 package dtu.tilecolor;
 
+import android.app.ActivityManager;
 import android.app.Service;
+import android.content.pm.ResolveInfo;
 import android.media.MediaPlayer;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+
+import java.util.List;
 
 /**
  * Created by steenlund on 6/15/16.
@@ -14,7 +18,6 @@ public class MusicService extends Service {
     public MediaPlayer player;
 
     public void onCreate() {
-        Log.i("Tag", "Test");
         super.onCreate();
     }
 
@@ -25,12 +28,14 @@ public class MusicService extends Service {
         player.setLooping(true);
         player.setVolume(volume, volume);
         player.start();
-        return 1;
+        return START_STICKY;
     }
+
 
     public void onStop() {
 
     }
+
     public void onPause() {
 
     }
@@ -38,15 +43,10 @@ public class MusicService extends Service {
     public void onDestroy() {
         player.stop();
         player.release();
-    }
-
-    @Override
-    public void onLowMemory() {
-
+        super.onDestroy();
     }
 
     public IBinder onBind(Intent arg0) {
-
         return null;
     }
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -120,13 +121,8 @@ public class GameActivity extends Activity {
 
     @Override
     public void onPause() {
-        if (!isPressed) {
-            Intent musicService = new Intent(getBaseContext(), MusicService.class);
-            stopService(musicService);
-        }
         super.onPause();
     }
-
 
     private void setupGestureDetector() {
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
