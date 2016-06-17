@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 /**
@@ -55,6 +57,15 @@ public class GameActivity extends Activity {
         }
         mFrame.addView(player);
         gb = new Game_Background(mapMatrix, tileMatrix);
+        Button menu = (Button) findViewById(R.id.buttonGameActivityMenu);
+
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GameActivity.this, FullscreenActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
