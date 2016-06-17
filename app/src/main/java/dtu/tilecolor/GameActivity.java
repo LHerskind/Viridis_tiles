@@ -59,6 +59,7 @@ public class GameActivity extends Activity {
         gb = new Game_Background(mapMatrix, tileMatrix);
         Button menu = (Button) findViewById(R.id.buttonGameActivityMenu);
         Button restart = (Button) findViewById(R.id.buttonGameActivityRestart);
+        Button music = (Button) findViewById(R.id.buttonGameActivityMusic);
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +73,14 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 recreate();
+            }
+        });
+
+        music.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent musicIntent = new Intent(GameActivity.this, MusicOptions.class);
+                startActivity(musicIntent);
             }
         });
 

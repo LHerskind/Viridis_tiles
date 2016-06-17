@@ -14,13 +14,14 @@ public class MusicService extends Service {
     public MediaPlayer player;
 
     public void onCreate() {
+        Log.i("Tag", "Test");
         super.onCreate();
-
     }
+
     public int onStartCommand(Intent intent, int flags, int startId) {
         float volume = intent.getIntExtra("volume", 0);
         volume /= 100;
-        player = MediaPlayer.create(getBaseContext(), intent.getIntExtra("id", 0));
+        player = MediaPlayer.create(getApplicationContext(), intent.getIntExtra("id", 0));
         player.setLooping(true);
         player.setVolume(volume, volume);
         player.start();
