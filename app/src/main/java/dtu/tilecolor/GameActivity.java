@@ -48,11 +48,8 @@ public class GameActivity extends Activity {
     private TileView player;
     private boolean isPressed = false;
     private boolean timeRunning = false;
+    private int steps = 1;
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     private GoogleApiClient client;
 
     @Override
@@ -137,11 +134,12 @@ public class GameActivity extends Activity {
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
-                if (!timeRunning) {
-                    timeRunning = true;
-                    startTime();
-                }
                 if (player.isReady() && !alreadyWon) {
+                    stepsView.setText(""+steps++);
+                    if (!timeRunning) {
+                        timeRunning = true;
+                        startTime();
+                    }
                     if (Math.abs(event1.getX() - event2.getX()) > Math.abs(event1.getY() - event2.getY())) {
                         if (event1.getX() > event2.getX()) {
                             if (gb.canMove("LEFT")) {
