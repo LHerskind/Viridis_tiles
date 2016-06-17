@@ -49,8 +49,10 @@ public class GameActivity extends Activity {
     private boolean isPressed = false;
     private boolean timeRunning = false;
     private int steps = 1;
+    private boolean ended = false;
+    private Button restart;
+    private Button music;
 
-    private GoogleApiClient client;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,8 +90,8 @@ public class GameActivity extends Activity {
         }
         mFrame.addView(player);
         gb = new Game_Background(mapMatrix, tileMatrix);
-        Button restart = (Button) findViewById(R.id.buttonGameActivityRestart);
-        Button music = (Button) findViewById(R.id.buttonGameActivityMusic);
+        restart = (Button) findViewById(R.id.buttonGameActivityRestart);
+        music = (Button) findViewById(R.id.buttonGameActivityMusic);
 
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,9 +110,6 @@ public class GameActivity extends Activity {
             }
         });
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -128,14 +127,13 @@ public class GameActivity extends Activity {
         super.onPause();
     }
 
-    private boolean alreadyWon = false;
 
     private void setupGestureDetector() {
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
-                if (player.isReady() && !alreadyWon) {
-                    stepsView.setText(""+steps++);
+                if (player.isReady() && !ended) {
+                    stepsView.setText("" + steps++);
                     if (!timeRunning) {
                         timeRunning = true;
                         startTime();
@@ -170,7 +168,6 @@ public class GameActivity extends Activity {
                         }
                     }
                     if (gb.hasWon()) {
-                        alreadyWon = true;
                         hasEnded(true);
                     } else if (gb.hasLost()) {
                         hasEnded(false);
@@ -182,6 +179,9 @@ public class GameActivity extends Activity {
     }
 
     private void hasEnded(boolean won) {
+        ended = true;
+        restart.setVisibility(View.GONE);
+        music.setVisibility(View.GONE);
         timeRunning = false;
         WinLoseFragment winLoseFragment = new WinLoseFragment();
         Bundle bundle = new Bundle();
@@ -202,16 +202,17 @@ public class GameActivity extends Activity {
     private void startTime() {
         Thread th = new Thread(new Runnable() {
             private long startTime = System.currentTimeMillis();
+
             public void run() {
                 while (timeRunning) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            timeView.setText("" + ((System.currentTimeMillis() - startTime) / 1000));
+                            timeView.setText("" + ((System.currentTimeMillis() - startTime) / 1000) + ":" + ((System.currentTimeMillis() - startTime) / 100) % 10);
                         }
                     });
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -233,37 +234,10 @@ public class GameActivity extends Activity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Game Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://dtu.tilecolor/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Game Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://dtu.tilecolor/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
     }
 }
