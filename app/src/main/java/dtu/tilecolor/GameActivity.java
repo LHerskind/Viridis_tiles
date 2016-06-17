@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -21,6 +20,7 @@ import android.widget.RelativeLayout;
 public class GameActivity extends Activity {
 
     private RelativeLayout mFrame;
+    private RelativeLayout mTextFrame;
     private GestureDetector mGestureDetector;
     private Game_Background gb;
     private char[][] mapMatrix;
@@ -41,11 +41,17 @@ public class GameActivity extends Activity {
         mapMatrix = (char[][]) intent.getExtras().getSerializable("map");
 
         mFrame = (RelativeLayout) findViewById(R.id.gameframe);
+        mTextFrame = (RelativeLayout) findViewById(R.id.gametextframe);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point point = new Point();
         display.getSize(point);
-        size = (point.x - 20) / 5;
+        size = (point.x) / 5;
+
+        mFrame.setPadding(10,size/2,10,10);
+        mTextFrame.setMinimumHeight(size/2);
+
+
         tileMatrix = new TileView[mapMatrix.length][mapMatrix[1].length];
         for (int i = 1; i < mapMatrix.length - 1; i++) {
             for (int j = 1; j < mapMatrix[i].length - 1; j++) {

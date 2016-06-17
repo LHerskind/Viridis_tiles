@@ -58,7 +58,6 @@ public class FullscreenActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 MenuItem item = (MenuItem) parent.getItemAtPosition(position);
-               // Toast.makeText(mContext, item.toString(), Toast.LENGTH_LONG).show();
                 // Når vi skal opdatere hvordan det ser ud, brug adapter.notifyDataSetChanged();
                 try {
                     LoadMap loadmap = new LoadMap(mContext, "maps/map2.txt");

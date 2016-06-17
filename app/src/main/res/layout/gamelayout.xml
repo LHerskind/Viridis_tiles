@@ -3,58 +3,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_background"
-    tools:context="dtu.tilecolor.FullscreenActivity"
-    android:id="@+id/gameframe"
-    android:padding="10dp"
-    >
+    tools:context="dtu.tilecolor.FullscreenActivity">
+
+    <RelativeLayout
+        android:id="@+id/gameframe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/gametextframe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:textColor="@color/honey_text_color"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small Text"
+            android:textColor="@color/honey_text_color"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Restart"
         android:id="@+id/buttonGameActivityRestart"
-        android:background="@color/dark_background"
-        android:textColor="#ffffff"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
-        android:maxHeight="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menu"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/dark_background"
+        android:maxHeight="5dp"
+        android:paddingBottom="0dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="0dp"
-        android:paddingBottom="0dp"
+        android:text="Restart"
+        android:textColor="#ffffff" />
+
+    <Button
         android:id="@+id/buttonGameActivityMenu"
-        android:background="@color/dark_background"
-        android:textColor="#ffffff"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/buttonGameActivityRestart"
         android:layout_centerHorizontal="true"
-        android:maxHeight="5dp" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Music"
-        android:textColor="#ffffff"
         android:background="@color/dark_background"
-        android:id="@+id/buttonGameActivityMusic"
+        android:maxHeight="5dp"
+        android:paddingBottom="0dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="0dp"
-        android:paddingBottom="0dp"
-        android:layout_alignTop="@+id/buttonGameActivityMenu"
+        android:text="Menu"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/buttonGameActivityMusic"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/buttonGameActivityMenu"
+        android:background="@color/dark_background"
         android:maxHeight="5dp"
-        android:nestedScrollingEnabled="true" />
+        android:nestedScrollingEnabled="true"
+        android:paddingBottom="0dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="0dp"
+        android:text="Music"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>
