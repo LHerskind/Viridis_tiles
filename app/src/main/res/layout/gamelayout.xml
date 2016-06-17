@@ -7,4 +7,53 @@
     android:id="@+id/gameframe"
     android:padding="10dp"
     >
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restart"
+        android:id="@+id/buttonGameActivityRestart"
+        android:background="@color/dark_background"
+        android:textColor="#ffffff"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:maxHeight="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:id="@+id/buttonGameActivityMenu"
+        android:background="@color/dark_background"
+        android:textColor="#ffffff"
+        android:layout_alignTop="@+id/buttonGameActivityRestart"
+        android:layout_centerHorizontal="true"
+        android:maxHeight="5dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mute"
+        android:textColor="#ffffff"
+        android:background="@color/dark_background"
+        android:id="@+id/buttonGameActivityMusic"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:layout_alignTop="@+id/buttonGameActivityMenu"
+        android:layout_alignParentStart="true"
+        android:maxHeight="5dp" />
+
 </RelativeLayout>

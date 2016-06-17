@@ -41,7 +41,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
         for(int i = 0; i < 1; i++){
             try {
-                LoadMap loadmap = new LoadMap(mContext, "maps/map1.txt");
+                LoadMap loadmap = new LoadMap(mContext, "maps/map2.txt");
                 char[][] map = loadmap.getMap();
                 values.add(new MenuItem("0:"+i,""+i,map));
             } catch (IOException e) {
@@ -59,7 +59,7 @@ public class FullscreenActivity extends AppCompatActivity {
                // Toast.makeText(mContext, item.toString(), Toast.LENGTH_LONG).show();
                 // Når vi skal opdatere hvordan det ser ud, brug adapter.notifyDataSetChanged();
                 try {
-                    LoadMap loadmap = new LoadMap(mContext, "maps/map1.txt");
+                    LoadMap loadmap = new LoadMap(mContext, "maps/map2.txt");
                     Intent intent = new Intent(mContext, GameActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("map",loadmap.getMap());
