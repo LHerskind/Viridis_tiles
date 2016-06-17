@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_background"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Music"
+        android:id="@+id/music_title"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/text_color"
+        android:textSize="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="Hello"
+        android:id="@+id/hello"
+        android:textColor="@color/honey_text_color"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/music_title"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="Walk the Dinosaur"
+        android:id="@+id/dinosaur"
+        android:textColor="@color/honey_text_color"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignBaseline="@+id/september"
+        android:layout_alignBottom="@+id/september"
+        android:layout_alignLeft="@+id/september"
+        android:layout_alignStart="@+id/september" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Dancing in September"
+        android:id="@+id/september"
+        android:textColor="@color/honey_text_color"
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/expecto"
+        android:layout_alignLeft="@+id/hello"
+        android:layout_alignStart="@+id/hello" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="Expecto Patronum"
+        android:id="@+id/expecto"
+        android:textColor="@color/honey_text_color"
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/green_view"
+        android:layout_alignLeft="@+id/music_switch"
+        android:layout_alignStart="@+id/music_switch"
+        android:layout_marginBottom="64dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Volume"
+        android:id="@+id/volume_text"
+        android:textSize="25dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:textColor="@color/darker_text_color"
+        android:gravity="center_horizontal|bottom"
+        android:layout_above="@+id/volume_bar"
+        android:layout_centerHorizontal="true" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/volume_bar"
+        android:layout_gravity="center_horizontal"
+        android:max="100"
+        android:progress="50"
+        android:indeterminate="false"
+        android:layout_above="@+id/green_view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:text="Music"
+        android:id="@+id/music_switch"
+        android:checked="true"
+        android:textColor="@color/darker_text_color"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_alignTop="@+id/green_view"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:id="@+id/green_view"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</LinearLayout>
