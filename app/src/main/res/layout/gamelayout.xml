@@ -23,22 +23,7 @@
             android:paddingTop="0dp"
             android:textColor="#ffffff"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:id="@+id/buttonGameActivityMenu"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/menu_icon"
-            android:maxHeight="5dp"
-            android:paddingBottom="0dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="0dp"
-            android:textColor="#ffffff"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/buttonGameActivityMusic"
@@ -54,7 +39,7 @@
             android:paddingTop="0dp"
             android:textColor="#ffffff"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <RelativeLayout
