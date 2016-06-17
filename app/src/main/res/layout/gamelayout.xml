@@ -44,7 +44,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mute"
+        android:text="Music"
         android:textColor="#ffffff"
         android:background="@color/dark_background"
         android:id="@+id/buttonGameActivityMusic"
@@ -54,6 +54,7 @@
         android:paddingBottom="0dp"
         android:layout_alignTop="@+id/buttonGameActivityMenu"
         android:layout_alignParentStart="true"
-        android:maxHeight="5dp" />
+        android:maxHeight="5dp"
+        android:nestedScrollingEnabled="true" />
 
 </RelativeLayout>
