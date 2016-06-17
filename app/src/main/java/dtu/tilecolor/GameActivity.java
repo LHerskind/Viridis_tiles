@@ -198,7 +198,6 @@ public class GameActivity extends Activity {
     private void startTime() {
         Thread th = new Thread(new Runnable() {
             private long startTime = System.currentTimeMillis();
-
             public void run() {
                 while (timeRunning) {
                     runOnUiThread(new Runnable() {
@@ -223,13 +222,9 @@ public class GameActivity extends Activity {
         return mGestureDetector.onTouchEvent(event);
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
     }
 
     @Override
