@@ -64,10 +64,18 @@ public class GameActivity extends Activity {
         }
         mFrame.addView(player);
         gb = new Game_Background(mapMatrix, tileMatrix);
+        Button menu = (Button) findViewById(R.id.buttonGameActivityMenu);
         Button restart = (Button) findViewById(R.id.buttonGameActivityRestart);
         Button music = (Button) findViewById(R.id.buttonGameActivityMusic);
 
-
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isPressed=true;
+                Intent intent = new Intent(GameActivity.this, FullscreenActivity.class);
+                startActivity(intent);
+            }
+        });
 
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
