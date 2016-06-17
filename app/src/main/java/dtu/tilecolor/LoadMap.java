@@ -23,8 +23,6 @@ public class LoadMap {
 
         row = scanner.nextInt();
         col = scanner.nextInt();
-        Log.i("LoadMap", ""+row+" "+col);
-
         map = "";
 
         while(scanner.hasNextLine()){
