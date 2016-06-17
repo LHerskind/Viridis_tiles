@@ -1,6 +1,7 @@
 package dtu.tilecolor;
 
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,9 +22,11 @@ import java.util.zip.Inflater;
 public class WinLoseFragment extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.winlosefragment, container, false);
         Bundle arguments = getArguments();
+
+        final FragmentManager fragmentManager = getActivity().getFragmentManager();
 
         boolean won = arguments.getBoolean("won");
         String text = arguments.getString("text");
@@ -39,12 +42,20 @@ public class WinLoseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
+                fragmentManager.popBackStack();
                 startActivity(intent);
             }
         });
 
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().recreate();
+                fragmentManager.popBackStack();
+            }
+        });
 
-        if(!won){
+        if (!won) {
             next.setVisibility(View.GONE);
         }
 

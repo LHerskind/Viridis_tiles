@@ -19,8 +19,6 @@ import android.widget.RelativeLayout;
 public class GameActivity extends Activity {
 
     private RelativeLayout mFrame;
-    private Bitmap mBitmap;
-    private int mDisplayWidth, mDisplayHeight;
     private GestureDetector mGestureDetector;
     private Game_Background gb;
     private char[][] mapMatrix;
@@ -107,25 +105,9 @@ public class GameActivity extends Activity {
                     }
                     if (gb.hasWon()) {
                         alreadyWon=true;
-                        WinLoseFragment newFragment = new WinLoseFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("text", "You won");
-                        bundle.putBoolean("won", true);
-                        newFragment.setArguments(bundle);
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.gameframe, newFragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
+                        hasEnded(true);
                     } else if (gb.hasLost()) {
-                        WinLoseFragment newFragment = new WinLoseFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("text", "You lost");
-                        bundle.putBoolean("won", false);
-                        newFragment.setArguments(bundle);
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.gameframe, newFragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
+                        hasEnded(false);
                     }
                 }
                 return true;
@@ -133,6 +115,22 @@ public class GameActivity extends Activity {
         });
     }
 
+    private void hasEnded(boolean won){
+        WinLoseFragment winLoseFragment = new WinLoseFragment();
+        Bundle bundle = new Bundle();
+        if(won){
+            bundle.putString("text", "You won");
+            bundle.putBoolean("won", true);
+        }else {
+            bundle.putString("text", "You lost");
+            bundle.putBoolean("won", false);
+        }
+        winLoseFragment.setArguments(bundle);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.gameframe, winLoseFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

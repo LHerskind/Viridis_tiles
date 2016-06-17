@@ -93,7 +93,7 @@ public class TileView extends View {
                     slide(direction, velocity);
                 }
             }
-        }, 0, 5, TimeUnit.MILLISECONDS);
+        }, 0, 2, TimeUnit.MILLISECONDS);
         }
     }
 
