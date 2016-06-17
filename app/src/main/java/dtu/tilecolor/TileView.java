@@ -44,7 +44,7 @@ public class TileView extends View {
         super(context);
         this.padding = size/10;
         this.size = size;
-        this.size2 = (int)(size*0.86);
+        this.size2 = (int)(size*0.75);
         this.c = c;
         x = size * (j - 1) + (size-size2)/2;
         y =  (size * (i - 1) + (size-size2)/2);
