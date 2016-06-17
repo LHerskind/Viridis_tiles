@@ -28,6 +28,7 @@ public class GameActivity extends Activity {
     private Context mContext;
     private int size;
     private TileView player;
+    private boolean isPressed = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class GameActivity extends Activity {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isPressed=true;
                 Intent intent = new Intent(GameActivity.this, FullscreenActivity.class);
                 startActivity(intent);
             }
@@ -72,6 +74,7 @@ public class GameActivity extends Activity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isPressed=true;
                 recreate();
             }
         });
@@ -79,6 +82,7 @@ public class GameActivity extends Activity {
         music.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isPressed=true;
                 Intent musicIntent = new Intent(GameActivity.this, MusicOptions.class);
                 startActivity(musicIntent);
             }
@@ -93,7 +97,11 @@ public class GameActivity extends Activity {
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
+        if(!isPressed) {
+            Intent musicService = new Intent(getBaseContext(), MusicService.class);
+            stopService(musicService);
+        }
         super.onPause();
     }
 

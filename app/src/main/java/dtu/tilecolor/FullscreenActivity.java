@@ -1,5 +1,6 @@
 package dtu.tilecolor;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -72,4 +74,10 @@ public class FullscreenActivity extends AppCompatActivity {
         });
     }
 
-}
+    public void onPause() {
+        Intent musicService = new Intent(getBaseContext(), MusicService.class);
+        stopService(musicService);
+        super.onPause();
+    }
+
+    }
