@@ -1,20 +1,26 @@
 package dtu.tilecolor;
 
-import android.content.Context;
+import java.io.Serializable;
 
 /**
  * Created by User on 15-Jun-16.
  */
-public class MenuItem {
+public class MenuItem implements Serializable {
 
     private String time, steps;
-    private char[][] map;
+    private char[][] map, playedMap;
 
     public MenuItem(String time, String steps, char[][] map) {
         this.time = time;
         this.steps = steps;
         this.map = map;
     }
+
+    public void setPlayedMap(char[][] map){
+        this.playedMap = map;
+    }
+
+    public char[][] getPlayedMap(){ return playedMap; }
 
     public String getTime (){
         return time;

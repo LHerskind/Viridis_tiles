@@ -1,4 +1,4 @@
-package course.labs.activitylab;
+package dtu.tilecolor;
 
 import android.app.Service;
 import android.media.MediaPlayer;

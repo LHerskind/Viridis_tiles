@@ -1,4 +1,4 @@
-package course.labs.activitylab;
+package dtu.tilecolor;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
+
+import dtu.tilecolor.R;
 
 /**
  * Created by steenlund on 6/15/16.
