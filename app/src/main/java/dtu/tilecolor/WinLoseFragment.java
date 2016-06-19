@@ -42,8 +42,10 @@ public class WinLoseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 fragmentManager.popBackStack();
                 startActivity(intent);
+                getActivity().finish();
             }
         });
 
