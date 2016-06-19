@@ -56,8 +56,8 @@ public class FullscreenActivity extends AppCompatActivity {
     }
 
     public void onStop() {
-        Intent musicService = new Intent(getBaseContext(), MusicService.class);
-        stopService(musicService);
+//        Intent musicService = new Intent(getBaseContext(), MusicService.class);
+//        stopService(musicService);
         super.onStop();
     }
 

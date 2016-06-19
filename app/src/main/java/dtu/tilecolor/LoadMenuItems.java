@@ -24,7 +24,7 @@ public class LoadMenuItems {
 
     private ArrayList<MenuItem> loadedList = new ArrayList<MenuItem>();
     private Context mContext;
-    private String FILENAME = "testFilemost.srl";
+    private String FILENAME = "gamedata.srl";
     private File path;
 
     public LoadMenuItems(Context mContext) {
@@ -44,6 +44,7 @@ public class LoadMenuItems {
         write(loadedList);
     }
 
+    // Kan gøres væsentligt smartere, lige nu skriver vi den hele på nu, kan vi ikke bare ændre i noget af det istedet.
     public void write(ArrayList<MenuItem> saveList){
         ObjectOutput out = null;
         try {
