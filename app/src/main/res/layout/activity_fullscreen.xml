@@ -1,43 +1,56 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fullscreen_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_background"
-    tools:context="dtu.tilecolor.FullscreenActivity"
-    android:id="@+id/fullscreen_content" >
+    tools:context="dtu.tilecolor.FullscreenActivity">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="55dp"
-        android:text="@string/app_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/text_color"
+
+    <ImageView
         android:id="@+id/titleView"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/viridis_title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="-20dp"
+        android:layout_marginBottom="-20dp" />
 
-    <FrameLayout
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:padding="5dp"
-        android:background="@color/border_color"
         android:layout_below="@+id/titleView"
+        android:background="@color/border_color"
+        android:padding="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         >
 
         <GridView
             android:id="@+id/gridview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="2"
             android:background="@color/dark_background"
             android:horizontalSpacing="10dp"
-            android:verticalSpacing="10dp"
+            android:numColumns="2"
             android:padding="10dp"
-            />
+            android:verticalSpacing="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
-    </FrameLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_alignTop="@+id/titleView"
+        android:layout_alignStart="@+id/titleView" />
 
 </RelativeLayout>

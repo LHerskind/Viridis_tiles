@@ -43,10 +43,8 @@ public class FullscreenActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 MenuItem item = (MenuItem) parent.getItemAtPosition(position);
                 // Når vi skal opdatere hvordan det ser ud, brug adapter.notifyDataSetChanged();
-                    //LoadMap loadmap = new LoadMap(mContext, "maps/map2.txt");
                     Intent intent = new Intent(mContext, GameActivity.class);
                     Bundle bundle = new Bundle();
-                //    bundle.putSerializable("map",item.getMap());
                     bundle.putSerializable("item",item);
                     intent.putExtras(bundle);
                     startActivity(intent);

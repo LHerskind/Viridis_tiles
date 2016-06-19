@@ -3,9 +3,9 @@
     <color name="text_color">#EBEBEB</color>
     <color name="dark_background">#212121</color>
     <color name="border_color">#c7bee6</color>
-    <color name="green">#00ff00</color>
-    <color name="red">#ff0000</color>
-    <color name="blue">#0000ff</color>
+    <color name="green">#41ff41</color>
+    <color name="red">#ff4141</color>
+    <color name="blue">#4141ff</color>
     <color name="darker_text_color">#696969</color>
     <color name="honey_text_color">#D0D0D0</color>
     <color name="honey_background_color"> #575757 </color>

@@ -38,6 +38,7 @@ public class LoadMenuItems {
     }
 
     public void update(MenuItem updateThis){
+        updateThis.resetMap();
         loadedList.remove(updateThis.getIndex());
         loadedList.add(updateThis.getIndex(),updateThis);
         write(loadedList);
