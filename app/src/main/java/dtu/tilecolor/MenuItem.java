@@ -1,5 +1,7 @@
 package dtu.tilecolor;
 
+import android.view.Menu;
+
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -12,6 +14,7 @@ public class MenuItem implements Serializable {
     private double time;
     private int steps;
     private char[][] map, oriMap;
+    private MenuItem next;
 
     public MenuItem(int time, int steps, char[][] map, int index) {
         this.time = time;
@@ -69,6 +72,10 @@ public class MenuItem implements Serializable {
     public int getIndex() {
         return index;
     }
+
+    public void setNext(MenuItem next) {this.next = next; }
+
+    public MenuItem getNext(){return next;}
 
 
 }

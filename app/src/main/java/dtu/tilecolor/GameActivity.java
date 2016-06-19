@@ -6,10 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -97,8 +95,8 @@ public class GameActivity extends Activity {
                 startActivity(musicIntent);
             }
         });
-
     }
+
 
     @Override
     protected void onResume() {

@@ -82,6 +82,11 @@ public class LoadMenuItems {
                 e.printStackTrace();
             }
         }
+
+        for(int i= 0; i < 5; i++){
+            loadedList.get(i).setNext(loadedList.get(i+1));
+        }
+
     }
 
     public ArrayList<MenuItem> getLoadedList() {

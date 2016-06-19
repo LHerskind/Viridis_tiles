@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import java.util.zip.Inflater;
  */
 public class WinLoseFragment extends Fragment {
 
+    private MenuItem oldItem;
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.winlosefragment, container, false);
@@ -38,29 +40,44 @@ public class WinLoseFragment extends Fragment {
 
         textView.setText(text);
 
+        if (!won) {
+            next.setVisibility(View.GONE);
+        }else {
+            oldItem = (MenuItem) getActivity().getIntent().getExtras().getSerializable("item");
+            if(oldItem.getNext() == null){
+                next.setVisibility(View.GONE);
+            }
+        }
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("item", oldItem.getNext());
+                getActivity().getIntent().replaceExtras(bundle);
+                getActivity().recreate();
+                fragmentManager.popBackStack();
+            }
+        });
+
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), FullscreenActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                fragmentManager.popBackStack();
-                startActivity(intent);
-                getActivity().finish();
+              Intent intent = new Intent(getActivity(), FullscreenActivity.class);
+              intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+              fragmentManager.popBackStack();
+              startActivity(intent);
+              getActivity().finish();
             }
         });
 
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().recreate();
                 fragmentManager.popBackStack();
+                getActivity().recreate();
             }
         });
-
-        if (!won) {
-            next.setVisibility(View.GONE);
-        }
-
 
         return view;
     }

@@ -1,6 +1,7 @@
 package dtu.tilecolor;
 
 import android.app.ActivityManager;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,8 @@ import java.util.List;
 public class FullscreenActivity extends AppCompatActivity {
 
     private Context mContext;
+    private MenuItemAdapter adapter;
+    private GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,33 +35,31 @@ public class FullscreenActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
-        final GridView gridView = (GridView) findViewById(R.id.gridview);
+        gridView = (GridView) findViewById(R.id.gridview);
 
         ArrayList<MenuItem> values = new LoadMenuItems(mContext).getLoadedList();
 
-        MenuItemAdapter adapter = new MenuItemAdapter (this, values);
+        adapter = new MenuItemAdapter(this, values);
 
         gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 MenuItem item = (MenuItem) parent.getItemAtPosition(position);
-                // Når vi skal opdatere hvordan det ser ud, brug adapter.notifyDataSetChanged();
-                    Intent intent = new Intent(mContext, GameActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("item",item);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-
+                Intent intent = new Intent(mContext, GameActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("item", item);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
 
-    public void onPause() {
+    public void onStop() {
         Intent musicService = new Intent(getBaseContext(), MusicService.class);
         stopService(musicService);
-        super.onPause();
+        super.onStop();
     }
 
 
-    }
+}
