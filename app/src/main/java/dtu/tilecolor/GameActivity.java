@@ -169,9 +169,11 @@ public class GameActivity extends Activity {
         WinLoseFragment winLoseFragment = new WinLoseFragment();
         Bundle bundle = new Bundle();
         if (won) {
-            item.setSteps(steps-1);
-            item.setTime(timeSpent);
-            new LoadMenuItems(mContext).update(item);
+            if((steps-1 < item.getSteps()) || item.getSteps() == 0) {
+                item.setSteps(steps - 1);
+                item.setTime(timeSpent);
+                new LoadMenuItems(mContext).update(item);
+            }
             bundle.putString("text", "You won");
             bundle.putBoolean("won", true);
         } else {
