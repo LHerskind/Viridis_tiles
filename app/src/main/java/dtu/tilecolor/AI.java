@@ -29,8 +29,7 @@ public class AI {
         int[] tiles;
         int player;
         int g; // Antallet af steps fra initial State.
-        int h; // Den estimerede, heuristiske værdi til målet (Manhattan
-        // Distance)
+        int h; // Den estimerede, heuristiske værdi til målet (Antallet af røde tiles)
         State previous; // Forrige state i vejen til løsningen
 
         // A* prioritetsfunktionen (f=g+h).
@@ -47,8 +46,7 @@ public class AI {
             previous = null;
         }
 
-        // Her defineres de senere states, hvor der byttes om på to givne tiles
-        // HOW DO THIS
+        // Her defineres de senere states, hvor spilleren rykker plads
         State(State previous, int slideFromIndex) {
             // Set the tiles to the previous ones
             tiles = Arrays.copyOf(previous.tiles, previous.tiles.length);
@@ -101,7 +99,6 @@ public class AI {
         public void toArray() {
             if (previous != null) {
                 solution.add(player);
-                //System.out.println("g =" + g + "  |  h = " + h);
                 previous.toArray();
             }
         }
@@ -144,7 +141,7 @@ public class AI {
         }
     }
 
-    // Bruges til at finde spilleren
+    // Bruges til at finde spilleren i start-staten
     static int index(int[] tiles, int val) {
         for (int i = 0; i < tiles.length; i++) {
 
@@ -155,7 +152,8 @@ public class AI {
         }
         return -1;
     }
-
+    // Den ene heuristiske metode, som hjælper med at finde en løsning hurtigst muligt, altså ikke
+    //med kortest mulige steps
     static int heuristic(int[] tiles, int player) {
         int h = 0;
         for (int i = 0; i < tiles.length; i++) {
@@ -172,7 +170,7 @@ public class AI {
         }
         return h;
     }
-
+    // Den anden heuristiske metode, som hjælper med at finde løsningen med kortest mulige trin (Anvendes ikke her)
     static int heuristic(int[] tiles) {
         int h = 0;
         for (int i = 0; i < tiles.length; i++) {
@@ -183,12 +181,13 @@ public class AI {
         }
         return h;
     }
-
+    // Indeholder løsningen
     public ArrayList<Integer> getSolution() {
         Collections.reverse(solution);
 
         return solution;
     }
+    // Returnerer true hvis banen kan løses, false ellers (Hvis solution-arraylisten er tom)
     public boolean isSolvable(int[] map) {
         solve(map);
         if(getSolution() == null) {
