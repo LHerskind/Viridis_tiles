@@ -40,8 +40,8 @@ public class FullscreenActivity extends AppCompatActivity {
         ArrayList<MenuItem> values = new LoadMenuItems(mContext).getLoadedList();
 
         adapter = new MenuItemAdapter(this, values);
-
         gridView.setAdapter(adapter);
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
@@ -53,6 +53,11 @@ public class FullscreenActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void onResume(){
+        adapter.update(new LoadMenuItems(mContext).getLoadedList());
+        super.onResume();
     }
 
     public void onStop() {
