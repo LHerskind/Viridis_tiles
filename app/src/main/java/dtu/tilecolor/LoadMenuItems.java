@@ -73,7 +73,7 @@ public class LoadMenuItems {
         }
 
     }
-
+    // Vi læser hvor mange filer der er og looper henover
     public void create() {
         String[] list = new String[0];
         try {
