@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_background"
-    tools:context="dtu.tilecolor.FullscreenActivity">
+    tools:context=".MainScreen">
 
     <RelativeLayout
         android:id="@+id/gameframe"

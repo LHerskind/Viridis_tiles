@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FullscreenActivity extends AppCompatActivity {
+public class MainScreen extends AppCompatActivity {
 
     private Context mContext;
     private MenuItemAdapter adapter;
