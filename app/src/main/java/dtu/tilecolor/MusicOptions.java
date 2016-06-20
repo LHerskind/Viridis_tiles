@@ -22,6 +22,10 @@ import dtu.tilecolor.R;
 
 public class MusicOptions extends Activity {
     public static Intent musicService;
+    private static int sound_level;
+    private static boolean checked_music = true;
+    private static boolean checked_tile = true;
+    private static int progress_levels = 50;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -30,14 +34,20 @@ public class MusicOptions extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         final SeekBar seekValue = (SeekBar) findViewById(R.id.volume_bar);
-        final Switch toggle = (Switch) findViewById(R.id.music_switch);
+        final Switch music_toggle = (Switch) findViewById(R.id.music_switch);
+        final Switch tile_toggle = (Switch) findViewById(R.id.tile_sound);
+
+        music_toggle.setChecked(checked_music);
+        tile_toggle.setChecked(checked_tile);
+        seekValue.setProgress(progress_levels);
+
         TextView statement = (TextView) findViewById(R.id.music_statement);
 
         Button goingHigher = (Button) findViewById(R.id.going_higher);
         goingHigher.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(toggle.isChecked()) {
+                if(music_toggle.isChecked()) {
                     if(musicService != null) {
                         stopService(musicService);
                         musicService = null;
@@ -54,7 +64,7 @@ public class MusicOptions extends Activity {
         jazzyFrench.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(toggle.isChecked()) {
+                if(music_toggle.isChecked()) {
                     if(musicService != null) {
                         stopService(musicService);
                         musicService = null;
@@ -71,7 +81,7 @@ public class MusicOptions extends Activity {
         newBeginning.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(toggle.isChecked()) {
+                if(music_toggle.isChecked()) {
                     if(musicService != null) {
                         stopService(musicService);
                         musicService = null;
@@ -88,7 +98,7 @@ public class MusicOptions extends Activity {
         sweet.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(toggle.isChecked()) {
+                if(music_toggle.isChecked()) {
                     if(musicService != null) {
                         stopService(musicService);
                         musicService = null;
@@ -104,9 +114,12 @@ public class MusicOptions extends Activity {
         seekValue.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                stopService(musicService);
-                musicService.putExtra("volume", progress);
-                startService(musicService);
+                progress_levels = progress;
+                if(musicService != null) {
+                    stopService(musicService);
+                    musicService.putExtra("volume", progress);
+                    startService(musicService);
+                }
             }
 
             @Override
@@ -116,16 +129,33 @@ public class MusicOptions extends Activity {
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        music_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(!b && musicService != null)
-                    stopService(new Intent(MusicOptions.this, MusicService.class));
-                else
-                    if (musicService != null)
+                if (!b) {
+                    checked_music = false;
+                    if(musicService != null)
+                        stopService(new Intent(MusicOptions.this, MusicService.class));
+                } else {
+                    checked_music = true;
+                    if (musicService != null) {
                         startService(musicService);
+                    }
+                }
             }
         });
+
+        tile_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                checked_tile = !checked_tile;
+                if(b)
+                    GameActivity.play_sound = true;
+                else
+                    GameActivity.play_sound = false;
+            }
+        });
+
 
         statement.setOnClickListener(new OnClickListener() {
             @Override

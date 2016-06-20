@@ -40,6 +40,7 @@ public class GameActivity extends Activity {
     private Button music;
     private MenuItem item;
     private MediaPlayer mp;
+    public static boolean play_sound = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,7 +119,7 @@ public class GameActivity extends Activity {
             @Override
             public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
                 if (player.isReady() && !ended) {
-                    if (mp != null) {
+                    if (mp != null && play_sound) {
                         mp.start();
                     }
                     if (!timeRunning) {

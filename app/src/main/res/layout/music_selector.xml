@@ -79,8 +79,7 @@
         android:textColor="@color/darker_text_color"
         android:gravity="center_horizontal|bottom"
         android:layout_above="@+id/volume_bar"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="0.25" />
+        android:layout_centerHorizontal="true" />
 
     <SeekBar
         android:layout_width="match_parent"
@@ -95,10 +94,23 @@
         android:layout_alignParentStart="true" />
 
     <Switch
-        android:layout_width="134dp"
-        android:layout_height="62dp"
-        android:text="Music"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:text="Music  "
         android:id="@+id/music_switch"
+        android:checked="true"
+        android:textColor="@color/darker_text_color"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_alignTop="@+id/green_view"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tile Sounds"
+        android:id="@+id/tile_sound"
         android:checked="true"
         android:textColor="@color/darker_text_color"
         android:textSize="20dp"

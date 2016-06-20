@@ -28,6 +28,7 @@ public class MainScreen extends AppCompatActivity {
     private Context mContext;
     private MenuItemAdapter adapter;
     private GridView gridView;
+    private boolean clicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class MainScreen extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("item", item);
                 intent.putExtras(bundle);
+                clicked = true;
                 startActivity(intent);
             }
         });
@@ -74,7 +76,8 @@ public class MainScreen extends AppCompatActivity {
 
     public void onStop() {
         Intent musicService = new Intent(getBaseContext(), MusicService.class);
-        stopService(musicService);
+        if(!clicked)
+            stopService(musicService);
         super.onStop();
     }
 
