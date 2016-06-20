@@ -20,7 +20,6 @@ public class MenuItemAdapter extends BaseAdapter {
     private Context context;
 
     public MenuItemAdapter(Context context, ArrayList<MenuItem> menuItems) {
-//        super(context, 0,menuItems);
         super();
         this.context = context;
         this.items = menuItems;
