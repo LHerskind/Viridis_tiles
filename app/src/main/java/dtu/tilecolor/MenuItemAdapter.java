@@ -73,7 +73,7 @@ public class MenuItemAdapter extends BaseAdapter {
         }
         mFrame.invalidate();
         convertView.invalidate();
-        mFrame.setMinimumHeight(size*(mapMatrix.length-2) );
+        mFrame.setMinimumHeight(size*(8-2) );
 
 
         return convertView;

@@ -5,7 +5,7 @@ import android.util.Log;
 /**
  * Created by matiasdaugaard on 14/06/16.
  */
-public class Game_Background {
+public class GameLogic {
 
     private char[][] mapMatrix;
     private TileView[][] tileMatrix;
@@ -14,7 +14,7 @@ public class Game_Background {
     private int[] lastPos = new int[2];
 
 
-    public Game_Background(char[][] mapMatrix, TileView[][] tileMatrix){
+    public GameLogic(char[][] mapMatrix, TileView[][] tileMatrix){
         this.mapMatrix = mapMatrix;
         this.tileMatrix = tileMatrix;
         playerRow = getStartPosition()[0];
