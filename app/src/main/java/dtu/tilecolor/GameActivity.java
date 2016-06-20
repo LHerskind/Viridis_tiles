@@ -118,7 +118,7 @@ public class GameActivity extends Activity {
             @Override
             public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
                 if (player.isReady() && !ended) {
-                    if(mp != null){
+                    if (mp != null) {
                         mp.start();
                     }
                     if (!timeRunning) {
@@ -177,10 +177,12 @@ public class GameActivity extends Activity {
         WinLoseFragment winLoseFragment = new WinLoseFragment();
         Bundle bundle = new Bundle();
         if (won) {
-            if((steps-1 < item.getSteps()) || item.getSteps() == 0) {
-                item.setSteps(steps - 1);
-                item.setTime(timeSpent);
-                new LoadMenuItems(mContext).update(item);
+            if (item.getIndex() != -1) {
+                if ((steps - 1 < item.getSteps()) || item.getSteps() == 0) {
+                    item.setSteps(steps - 1);
+                    item.setTime(timeSpent);
+                    new LoadMenuItems(mContext).update(item);
+                }
             }
             bundle.putString("text", "You won");
             bundle.putBoolean("won", true);
@@ -204,8 +206,8 @@ public class GameActivity extends Activity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            timeSpent = (int) ((System.currentTimeMillis()-startTime)/1000);
-                            timeView.setText("" +timeSpent);
+                            timeSpent = (int) ((System.currentTimeMillis() - startTime) / 1000);
+                            timeView.setText("" + timeSpent);
                         }
                     });
                     try {

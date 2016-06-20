@@ -1,6 +1,8 @@
 package dtu.tilecolor;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,8 +14,7 @@ public class AI {
     private int mapWidth = 5;
 
     public AI(int[] initial) {
-        isSolvable(initial);
-
+//                isSolvable(initial);
     }
 
     final PriorityQueue<State> queue = new PriorityQueue<State>(100, new Comparator<State>() {
@@ -47,11 +48,11 @@ public class AI {
         }
 
         // Her defineres de senere states, hvor spilleren rykker plads
-        State(State previous, int slideFromIndex) {
+        State(State previous, int slideFromIndex,int direction) {
             // Set the tiles to the previous ones
             tiles = Arrays.copyOf(previous.tiles, previous.tiles.length);
             player = slideFromIndex;
-            tiles[player]--;
+            tiles[player+direction]--;
 
             g = previous.g + 1;
             h = heuristic(tiles, player);
@@ -59,8 +60,7 @@ public class AI {
         }
 
         boolean isGoal() {
-            if(h != 0) return false;
-            else return true;
+            return h == 0;
 
         }
 
@@ -68,7 +68,7 @@ public class AI {
             if (player + mapWidth >= tiles.length || tiles[player + mapWidth] == 0) {
                 return null;
             } else {
-                return new State(this, player + mapWidth);
+                return new State(this, player + mapWidth,-mapWidth);
             }
         }
 
@@ -76,7 +76,7 @@ public class AI {
             if (player - mapWidth < 0  ||  tiles[player-mapWidth] == 0) {
                 return null;
             } else {
-                return new State(this, player - mapWidth);
+                return new State(this, player - mapWidth,mapWidth);
             }
         }
 
@@ -84,7 +84,7 @@ public class AI {
             if (player + 1 >= tiles.length || player % 5 == 4 || tiles[player+1] == 0) {
                 return null;
             } else {
-                return new State(this, player + 1);
+                return new State(this, player + 1,-1);
             }
         }
 
@@ -92,7 +92,7 @@ public class AI {
             if (player <= 0 || player % 5 == 0 || tiles[player-1] == 0) {
                 return null;
             } else {
-                return new State(this, player - 1);
+                return new State(this, player - 1,1);
             }
         }
 
@@ -146,7 +146,7 @@ public class AI {
         for (int i = 0; i < tiles.length; i++) {
 
             if (tiles[i] == val) {
-                tiles[i] = 1;
+                tiles[i] = 2;
                 return i;
             }
         }
@@ -190,9 +190,7 @@ public class AI {
     // Returnerer true hvis banen kan løses, false ellers (Hvis solution-arraylisten er tom)
     public boolean isSolvable(int[] map) {
         solve(map);
-        if(getSolution() == null) {
-            return false;
-        }
-        else return true;
+        Log.i("AI",""+getSolution() );
+        return !getSolution().isEmpty();
     }
 }

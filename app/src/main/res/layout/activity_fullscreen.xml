@@ -19,7 +19,6 @@
         android:layout_marginTop="-20dp"
         android:layout_marginBottom="-20dp" />
 
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +27,8 @@
         android:padding="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        >
+        android:id="@+id/relativeLayout"
+        android:layout_above="@+id/randommap">
 
         <GridView
             android:id="@+id/gridview"
@@ -39,18 +39,22 @@
             android:numColumns="2"
             android:padding="10dp"
             android:verticalSpacing="10dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true" />
+            android:layout_alignParentBottom="true"
+            />
 
     </RelativeLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_alignTop="@+id/titleView"
-        android:layout_alignStart="@+id/titleView" />
+        android:text="Random map"
+        android:textColor="@color/text_color"
+        android:id="@+id/randommap"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        />
 
 </RelativeLayout>

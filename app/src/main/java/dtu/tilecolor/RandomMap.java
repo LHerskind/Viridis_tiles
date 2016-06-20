@@ -1,3 +1,5 @@
+package dtu.tilecolor;
+
 import java.util.Random;
 
 public class RandomMap {
@@ -28,17 +30,32 @@ public class RandomMap {
 				}
 			}	
 		}
-		
+
+		int k= 0;
 		for(int i = 1; i < map.length-1; i++){
-			for(int j = 1; j < map[i].length-1; j++){ 
-				mapList[i+j] = map[i][j];
+			for(int j = 1; j < map[i].length-1; j++, k++){
+				mapList[k] = map[i][j];
 			}
 		}
-		
 	}
-	public char[] getMapList(){
-		return mapList;
+
+	public int[] getMapList(){
+		int[] list = new int[mapList.length];
+		for(int i = 0; i < mapList.length; i++){
+			if(mapList[i] == 'w'){
+				list[i] = 0;
+			} else if(mapList[i] == 'r'){
+				list[i] = 2;
+			} else if(mapList[i] == 'g'){
+				list[i] = 1;
+			} else {
+				list[i]=-1;
+			}
+		}
+		return list;
 	}
+
+
 	
 	public char[][] getMap(){
 		return map;
