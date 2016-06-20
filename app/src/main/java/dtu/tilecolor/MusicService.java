@@ -15,7 +15,9 @@ import java.util.List;
  */
 public class MusicService extends Service {
 
-    public MediaPlayer player;
+    public static MediaPlayer player;
+    public static int duration;
+    public static int song = 0;
 
     public void onCreate() {
         super.onCreate();
@@ -25,6 +27,10 @@ public class MusicService extends Service {
         float volume = intent.getIntExtra("volume", 0);
         volume /= 100;
         player = MediaPlayer.create(getApplicationContext(), intent.getIntExtra("id", 0));
+        if(song == intent.getIntExtra("id", 1))
+            player.seekTo(duration);
+        else
+            song = intent.getIntExtra("id", 1);
         player.setLooping(true);
         player.setVolume(volume, volume);
         player.start();
@@ -41,6 +47,7 @@ public class MusicService extends Service {
     }
     @Override
     public void onDestroy() {
+        duration = player.getCurrentPosition();
         player.stop();
         player.release();
         super.onDestroy();

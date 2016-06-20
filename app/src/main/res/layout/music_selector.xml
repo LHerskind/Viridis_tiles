@@ -19,8 +19,8 @@
     <Button
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:text="Hello"
-        android:id="@+id/hello"
+        android:text="Going Higher"
+        android:id="@+id/going_higher"
         android:background="@color/honey_background_color"
         android:textColor="@color/honey_text_color"
         android:layout_gravity="center_horizontal"
@@ -30,40 +30,43 @@
     <Button
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:text="Walk the Dinosaur"
-        android:id="@+id/dinosaur"
+        android:text="Jazzy French"
+        android:id="@+id/jazzy_french"
         android:background="@color/honey_background_color"
         android:textColor="@color/honey_text_color"
         android:layout_gravity="center_horizontal"
         android:layout_alignBaseline="@+id/september"
         android:layout_alignBottom="@+id/september"
         android:layout_alignLeft="@+id/september"
-        android:layout_alignStart="@+id/september" />
+        android:layout_alignStart="@+id/september"
+        android:layout_marginTop="10dp" />
 
     <Button
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Dancing in September"
-        android:id="@+id/september"
+        android:layout_height="60dp"
+        android:text="New Beginning"
+        android:id="@+id/new_beginning"
         android:background="@color/honey_background_color"
         android:textColor="@color/honey_text_color"
         android:layout_gravity="center_horizontal"
         android:layout_above="@+id/expecto"
         android:layout_alignLeft="@+id/hello"
-        android:layout_alignStart="@+id/hello" />
+        android:layout_alignStart="@+id/hello"
+        android:layout_marginTop="10dp" />
 
     <Button
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:text="Expecto Patronum"
-        android:id="@+id/expecto"
+        android:text="Sweet"
+        android:id="@+id/sweet"
         android:background="@color/honey_background_color"
         android:textColor="@color/honey_text_color"
         android:layout_gravity="center_horizontal"
         android:layout_above="@+id/green_view"
         android:layout_alignLeft="@+id/music_switch"
         android:layout_alignStart="@+id/music_switch"
-        android:layout_marginBottom="64dp" />
+        android:layout_marginBottom="64dp"
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -76,7 +79,8 @@
         android:textColor="@color/darker_text_color"
         android:gravity="center_horizontal|bottom"
         android:layout_above="@+id/volume_bar"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_weight="0.25" />
 
     <SeekBar
         android:layout_width="match_parent"
@@ -91,8 +95,8 @@
         android:layout_alignParentStart="true" />
 
     <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="47dp"
+        android:layout_width="134dp"
+        android:layout_height="62dp"
         android:text="Music"
         android:id="@+id/music_switch"
         android:checked="true"
@@ -103,4 +107,15 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal" />
 
+    <TextView
+        android:layout_width="232dp"
+        android:layout_height="34dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Statement about Music"
+        android:id="@+id/music_statement"
+        android:textColor="@color/darker_text_color"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_weight="0.14" />
 </LinearLayout>
