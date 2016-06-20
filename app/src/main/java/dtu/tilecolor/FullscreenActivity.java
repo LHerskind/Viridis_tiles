@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -61,8 +62,8 @@ public class FullscreenActivity extends AppCompatActivity {
     }
 
     public void onStop() {
-//        Intent musicService = new Intent(getBaseContext(), MusicService.class);
-//        stopService(musicService);
+        Intent musicService = new Intent(getBaseContext(), MusicService.class);
+        stopService(musicService);
         super.onStop();
     }
 

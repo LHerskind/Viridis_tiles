@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.GestureDetector;
@@ -38,11 +39,13 @@ public class GameActivity extends Activity {
     private Button restart;
     private Button music;
     private MenuItem item;
-
+    private MediaPlayer mp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mp = MediaPlayer.create(this, R.raw.perc);
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.gamelayout);
@@ -109,12 +112,15 @@ public class GameActivity extends Activity {
         super.onPause();
     }
 
+
     private void setupGestureDetector() {
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
                 if (player.isReady() && !ended) {
-                    stepsView.setText("" + steps++);
+                    if(mp != null){
+                        mp.start();
+                    }
                     if (!timeRunning) {
                         timeRunning = true;
                         startTime();
@@ -122,12 +128,14 @@ public class GameActivity extends Activity {
                     if (Math.abs(event1.getX() - event2.getX()) > Math.abs(event1.getY() - event2.getY())) {
                         if (event1.getX() > event2.getX()) {
                             if (gb.canMove("LEFT")) {
+                                stepsView.setText("" + steps++);
                                 gb.movePlayer("LEFT");
                                 tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
                                 player.startSlide("LEFT");
                             }
                         } else {
                             if (gb.canMove("RIGHT")) {
+                                stepsView.setText("" + steps++);
                                 gb.movePlayer("RIGHT");
                                 tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
                                 player.startSlide("RIGHT");
@@ -136,12 +144,14 @@ public class GameActivity extends Activity {
                     } else {
                         if (event1.getY() > event2.getY()) {
                             if (gb.canMove("UP")) {
+                                stepsView.setText("" + steps++);
                                 gb.movePlayer("UP");
                                 tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
                                 player.startSlide("UP");
                             }
                         } else {
                             if (gb.canMove("DOWN")) {
+                                stepsView.setText("" + steps++);
                                 gb.movePlayer("DOWN");
                                 tileMatrix[gb.getLastPos()[0]][gb.getLastPos()[1]].invalidate();
                                 player.startSlide("DOWN");
