@@ -71,6 +71,7 @@ public class MenuItemAdapter extends BaseAdapter {
                 }
             }
         }
+
         mFrame.invalidate();
         convertView.invalidate();
         mFrame.setMinimumHeight(size*(10-2) );

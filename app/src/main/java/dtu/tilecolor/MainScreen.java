@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -52,6 +53,16 @@ public class MainScreen extends AppCompatActivity {
                 bundle.putSerializable("item", item);
                 intent.putExtras(bundle);
                 startActivity(intent);
+            }
+        });
+
+        Button randomMapButton = (Button) findViewById(R.id.randommap);
+
+        randomMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateNewMap newMap = new CreateNewMap(mContext);
+                startActivity(newMap.getIntent());
             }
         });
     }

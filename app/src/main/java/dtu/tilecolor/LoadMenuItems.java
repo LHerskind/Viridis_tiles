@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -64,7 +65,7 @@ public class LoadMenuItems {
         try {
             input = new ObjectInputStream(new FileInputStream(new File(new File(path,"")+File.separator+FILENAME)));
             loadedList = (ArrayList<MenuItem>) input.readObject();
-            Log.i("TAG","Reading from file"+loadedList.get(0).getSteps());
+            Log.i("TAG","Reading from file");
             input.close();
         } catch (Exception e) {
             create();
@@ -72,9 +73,17 @@ public class LoadMenuItems {
         }
 
     }
-
+    // Vi læser hvor mange filer der er og looper henover
     public void create() {
-        for (int i = 0; i < 6; i++) {
+        String[] list = new String[0];
+        try {
+            list = mContext.getAssets().list("maps");
+            Log.i("Tag",""+list.length);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < list.length; i++) {
             try {
                 LoadMap loadmap = new LoadMap(mContext, "maps/map" + (i+1) + ".txt");
                 char[][] map = loadmap.getMap();
@@ -84,7 +93,7 @@ public class LoadMenuItems {
             }
         }
 
-        for(int i= 0; i < 5; i++){
+        for(int i= 0; i < list.length-1; i++){
             loadedList.get(i).setNext(loadedList.get(i+1));
         }
 
