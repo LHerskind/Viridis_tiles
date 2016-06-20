@@ -26,7 +26,7 @@ public class GameActivity extends Activity {
     private TextView stepsView;
     private TextView timeView;
     private GestureDetector mGestureDetector;
-    private Game_Background gb;
+    private GameLogic gb;
     private char[][] mapMatrix;
     private TileView[][] tileMatrix;
     private Context mContext;
@@ -80,7 +80,7 @@ public class GameActivity extends Activity {
             }
         }
         mFrame.addView(player);
-        gb = new Game_Background(mapMatrix, tileMatrix);
+        gb = new GameLogic(mapMatrix, tileMatrix);
         restart = (Button) findViewById(R.id.buttonGameActivityRestart);
         music = (Button) findViewById(R.id.buttonGameActivityMusic);
 
