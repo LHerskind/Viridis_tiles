@@ -151,10 +151,7 @@ public class MusicOptions extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 checked_tile = !checked_tile;
-                if(b)
-                    GameActivity.play_sound = true;
-                else
-                    GameActivity.play_sound = false;
+                GameActivity.play_sound = b;
             }
         });
 
@@ -176,7 +173,7 @@ public class MusicOptions extends Activity {
     }
 
     public void onResume() {
-        if(MusicOptions.musicService != null && entered == false)
+        if(MusicOptions.musicService != null && entered == false && checked_music)
             startService(MusicOptions.musicService);
         super.onResume();
     }

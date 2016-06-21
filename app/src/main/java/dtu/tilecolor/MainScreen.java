@@ -105,7 +105,7 @@ public class MainScreen extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
         adapter.update(new LoadMenuItems(mContext).getLoadedList());
         clicked = false;
-        if (MusicOptions.musicService != null && !running)
+        if (MusicOptions.musicService != null && !running && MusicOptions.checked_music)
             startService(MusicOptions.musicService);
         super.onResume();
     }
