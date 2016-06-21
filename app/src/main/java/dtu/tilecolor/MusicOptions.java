@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,9 +24,10 @@ import dtu.tilecolor.R;
 public class MusicOptions extends Activity {
     public static Intent musicService;
     private static int sound_level;
-    private static boolean checked_music = true;
+    public static boolean checked_music = true;
     private static boolean checked_tile = true;
     private static int progress_levels = 50;
+    public static boolean entered = false;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class MusicOptions extends Activity {
 
         TextView statement = (TextView) findViewById(R.id.music_statement);
 
-        Button goingHigher = (Button) findViewById(R.id.going_higher);
+        final Button goingHigher = (Button) findViewById(R.id.going_higher);
         goingHigher.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,7 +172,19 @@ public class MusicOptions extends Activity {
     }
 
     public void onDestroy() {
-//        stopService(musicService);
         super.onDestroy();
+    }
+
+    public void onResume() {
+        if(MusicOptions.musicService != null && entered == false)
+            startService(MusicOptions.musicService);
+        super.onResume();
+    }
+
+    public void onPause() {
+        entered = false;
+        GameActivity.musicStopped = true;
+        stopService(musicService);
+        super.onPause();
     }
 }

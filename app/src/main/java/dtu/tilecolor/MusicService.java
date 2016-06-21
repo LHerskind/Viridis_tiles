@@ -1,18 +1,11 @@
 package dtu.tilecolor;
 
-import android.app.ActivityManager;
 import android.app.Service;
-import android.content.pm.ResolveInfo;
 import android.media.MediaPlayer;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import java.util.List;
-
-/**
- * Created by steenlund on 6/15/16.
- */
 public class MusicService extends Service {
 
     public static MediaPlayer player;
@@ -24,16 +17,22 @@ public class MusicService extends Service {
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
-        float volume = intent.getIntExtra("volume", 0);
-        volume /= 100;
-        player = MediaPlayer.create(getApplicationContext(), intent.getIntExtra("id", 0));
-        if(song == intent.getIntExtra("id", 1))
-            player.seekTo(duration);
-        else
-            song = intent.getIntExtra("id", 1);
-        player.setLooping(true);
-        player.setVolume(volume, volume);
-        player.start();
+        if(intent != null) {
+            float volume = 50;
+            if (intent.hasExtra("volume"))
+                volume = intent.getIntExtra("volume", 0);
+            volume /= 100;
+            if (intent.hasExtra("id")) {
+                player = MediaPlayer.create(getApplicationContext(), intent.getIntExtra("id", 0));
+                if (song == intent.getIntExtra("id", 1))
+                    player.seekTo(duration);
+                else
+                    song = intent.getIntExtra("id", 1);
+            }
+            player.setLooping(true);
+            player.setVolume(volume, volume);
+            player.start();
+        }
         return START_STICKY;
     }
 
