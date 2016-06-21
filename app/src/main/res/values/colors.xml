@@ -2,6 +2,7 @@
 <resources>
     <color name="text_color">#EBEBEB</color>
     <color name="dark_background">#212121</color>
+    <color name="random_button">#353535</color>
     <color name="border_color">#c7bee6</color>
     <color name="green">#41ff41</color>
     <color name="red">#ff4141</color>

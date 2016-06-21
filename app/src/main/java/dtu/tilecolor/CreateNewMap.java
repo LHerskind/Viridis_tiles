@@ -23,10 +23,9 @@ public class CreateNewMap {
         boolean solveAble = false;
         while(!solveAble){
             RandomMap randomMap = new RandomMap();
-            Log.i("PIS", randomMap.getMapList().toString());
-            AI ai = new AI(randomMap.getMapList());
+            AI ai = new AI();
             solveAble = ai.isSolvable(randomMap.getMapList());
-            Log.i("Kan banen løses", ""+solveAble);
+
             if(solveAble){
                 char[][] map = randomMap.getMap();
                 intent = new Intent(mContext, GameActivity.class);
