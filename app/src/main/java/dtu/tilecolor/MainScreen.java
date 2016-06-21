@@ -24,7 +24,6 @@ public class MainScreen extends AppCompatActivity {
     private boolean clicked = false;
     private static boolean running = true;
     private ProgressBar progressBar;
-    private CreateNewMap newMap;
     private Intent intentSend;
     private Thread t;
 
@@ -79,7 +78,7 @@ public class MainScreen extends AppCompatActivity {
                     clicked = true;
                     t = new Thread(){
                         public void run(){
-                            newMap = new CreateNewMap(mContext);
+                            CreateNewMap newMap = new CreateNewMap(mContext);
                             intentSend = newMap.getIntent();
                             handler.sendEmptyMessage(0);
                         }
