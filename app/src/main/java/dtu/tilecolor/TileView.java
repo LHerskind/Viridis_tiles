@@ -18,8 +18,6 @@ public class TileView extends View {
 
     private final Paint mPaint = new Paint();
     private char c;
-    private int i2;
-    private int j2;
     private int size;
     private int size2;
     private boolean isPlayer = false;
@@ -59,10 +57,7 @@ public class TileView extends View {
     protected synchronized void onDraw(Canvas canvas) {
         //super.onDraw(canvas);
         canvas.save();
-        if(!isPlayer){
-            setColor(c);
-            canvas.drawRect(x, y, x + (size - padding), y + (size - padding), mPaint);
-        }else {
+        if(isPlayer){
             mPaint.setColor(Color.BLUE);
             canvas.drawRect(x, y, x + (size2 - padding), y + (size2 - padding), mPaint);
             if(!isStart) {
@@ -70,6 +65,9 @@ public class TileView extends View {
                 canvas.drawRect(x2, y2, x2 + (size - padding), y2 + (size - padding), mPaint);
                 isPlayer = false;
             }
+        }else {
+            setColor(c);
+            canvas.drawRect(x, y, x + (size - padding), y + (size - padding), mPaint);
         }
         canvas.restore();
     }
