@@ -96,7 +96,6 @@ public class MainScreen extends AppCompatActivity {
             MusicOptions.musicService = new Intent(getBaseContext(), MusicService.class);
             MusicOptions.musicService.putExtra("volume", 50);
             MusicOptions.musicService.putExtra("id", R.raw.sweet);
-            MusicOptions.current_id = R.raw.sweet;
             startService(MusicOptions.musicService);
         }
         super.onStart();
@@ -114,14 +113,14 @@ public class MainScreen extends AppCompatActivity {
     public void onPause(){
         super.onPause();
         t = null;
-    }
-
-    public void onStop() {
         running = false;
         if (clicked == false) {
             stopService(MusicOptions.musicService);
-            GameActivity.musicStopped = false;
         }
+        GameActivity.musicStopped = false;
+    }
+
+    public void onStop() {
         super.onStop();
     }
 }
