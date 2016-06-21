@@ -15,9 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.RelativeLayout;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -77,7 +74,6 @@ public class MainScreen extends AppCompatActivity {
             MusicOptions.musicService = new Intent(getBaseContext(), MusicService.class);
             MusicOptions.musicService.putExtra("volume", 50);
             MusicOptions.musicService.putExtra("id", R.raw.sweet);
-            MusicOptions.current_id = R.raw.sweet;
             startService(MusicOptions.musicService);
         }
         super.onStart();
@@ -91,12 +87,15 @@ public class MainScreen extends AppCompatActivity {
         super.onResume();
     }
 
-    public void onStop() {
+    public void onPause() {
         running = false;
-        if(clicked == false) {
+        if(clicked == false)
             stopService(MusicOptions.musicService);
-            GameActivity.musicStopped = false;
-        }
+        GameActivity.musicStopped = false;
+        super.onPause();
+    }
+
+    public void onStop() {
         super.onStop();
     }
 }

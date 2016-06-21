@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,7 +27,6 @@ public class MusicOptions extends Activity {
     public static boolean checked_music = true;
     private static boolean checked_tile = true;
     private static int progress_levels = 50;
-    public static int current_id;
     public static boolean entered = false;
 
     @Override
@@ -45,7 +45,7 @@ public class MusicOptions extends Activity {
 
         TextView statement = (TextView) findViewById(R.id.music_statement);
 
-        Button goingHigher = (Button) findViewById(R.id.going_higher);
+        final Button goingHigher = (Button) findViewById(R.id.going_higher);
         goingHigher.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
