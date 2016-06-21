@@ -1,5 +1,7 @@
 package dtu.tilecolor;
 
+import android.util.Log;
+
 import java.util.Random;
 
 public class RandomMap {
@@ -48,7 +50,7 @@ public class RandomMap {
 				list[i] = 2;
 			} else if(mapList[i] == 'g'){
 				list[i] = 1;
-			} else {
+			} else if(mapList[i] == 's') {
 				list[i]=-1;
 			}
 		}

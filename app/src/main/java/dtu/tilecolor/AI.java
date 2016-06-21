@@ -13,10 +13,6 @@ public class AI {
     private ArrayList<Integer> solution = new ArrayList<Integer>();
     private int mapWidth = 5;
 
-    public AI(int[] initial) {
-//                isSolvable(initial);
-    }
-
     final PriorityQueue<State> queue = new PriorityQueue<State>(100, new Comparator<State>() {
         @Override
         // De forskellige states bliver sammenlignet i forhold til deres
@@ -113,7 +109,7 @@ public class AI {
     // Run the solver.
     public void solve(int[] initial) {
 
-        // Her resettes de to lister
+        // Her resettes queuen
         queue.clear();
 
         // Start staten tilføjes til queuen.
@@ -132,12 +128,14 @@ public class AI {
             }
 
 
-
-            // Her tilføjer vi om muligt 4 nye states til vores queue
-            addNextState(state.moveRight());
-            addNextState(state.moveDown());
-            addNextState(state.moveLeft());
-            addNextState(state.moveUp());
+            if(queue.size() > 1500) {
+                return;
+            }
+                // Her tilføjer vi om muligt 4 nye states til vores queue
+                addNextState(state.moveRight());
+                addNextState(state.moveDown());
+                addNextState(state.moveLeft());
+                addNextState(state.moveUp());
         }
     }
 
@@ -190,7 +188,6 @@ public class AI {
     // Returnerer true hvis banen kan løses, false ellers (Hvis solution-arraylisten er tom)
     public boolean isSolvable(int[] map) {
         solve(map);
-        Log.i("AI",""+getSolution() );
         return !getSolution().isEmpty();
     }
 }
