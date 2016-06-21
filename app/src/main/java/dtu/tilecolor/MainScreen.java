@@ -29,6 +29,7 @@ public class MainScreen extends AppCompatActivity {
     private MenuItemAdapter adapter;
     private GridView gridView;
     private boolean clicked = false;
+    private static boolean running = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,22 +65,38 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CreateNewMap newMap = new CreateNewMap(mContext);
+                clicked = true;
                 startActivity(newMap.getIntent());
             }
         });
     }
 
+    public void onStart() {
+        if(MusicOptions.musicService == null) {
+            MusicOptions.musicService =  new Intent(getBaseContext(), MusicService.class);
+            MusicOptions.musicService = new Intent(getBaseContext(), MusicService.class);
+            MusicOptions.musicService.putExtra("volume", 50);
+            MusicOptions.musicService.putExtra("id", R.raw.sweet);
+            MusicOptions.current_id = R.raw.sweet;
+            startService(MusicOptions.musicService);
+        }
+        super.onStart();
+    }
+
     public void onResume(){
         adapter.update(new LoadMenuItems(mContext).getLoadedList());
+        clicked = false;
+        if(MusicOptions.musicService != null && !running)
+            startService(MusicOptions.musicService);
         super.onResume();
     }
 
     public void onStop() {
-        Intent musicService = new Intent(getBaseContext(), MusicService.class);
-        if(!clicked)
-            stopService(musicService);
+        running = false;
+        if(clicked == false) {
+            stopService(MusicOptions.musicService);
+            GameActivity.musicStopped = false;
+        }
         super.onStop();
     }
-
-
 }

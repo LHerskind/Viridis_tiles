@@ -23,9 +23,11 @@ import dtu.tilecolor.R;
 public class MusicOptions extends Activity {
     public static Intent musicService;
     private static int sound_level;
-    private static boolean checked_music = true;
+    public static boolean checked_music = true;
     private static boolean checked_tile = true;
     private static int progress_levels = 50;
+    public static int current_id;
+    public static boolean entered = false;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -170,7 +172,19 @@ public class MusicOptions extends Activity {
     }
 
     public void onDestroy() {
-//        stopService(musicService);
         super.onDestroy();
+    }
+
+    public void onResume() {
+        if(MusicOptions.musicService != null && entered == false)
+            startService(MusicOptions.musicService);
+        super.onResume();
+    }
+
+    public void onPause() {
+        entered = false;
+        GameActivity.musicStopped = true;
+        stopService(musicService);
+        super.onPause();
     }
 }

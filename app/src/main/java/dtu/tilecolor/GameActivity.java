@@ -41,6 +41,8 @@ public class GameActivity extends Activity {
     private MenuItem item;
     private MediaPlayer mp;
     public static boolean play_sound = true;
+    private boolean clicked = false;
+    public static boolean musicStopped = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,7 @@ public class GameActivity extends Activity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clicked = true;
                 recreate();
             }
         });
@@ -96,6 +99,8 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent musicIntent = new Intent(GameActivity.this, MusicOptions.class);
+                clicked = true;
+                MusicOptions.entered = true;
                 startActivity(musicIntent);
             }
         });
@@ -105,11 +110,20 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(MusicOptions.musicService != null && MusicOptions.checked_music && musicStopped == true) {
+            startService(MusicOptions.musicService);
+            musicStopped = false;
+        }
         setupGestureDetector();
     }
 
     @Override
     public void onPause() {
+        if(clicked == false) {
+            stopService(MusicOptions.musicService);
+            musicStopped = true;
+        }
+        clicked = false;
         super.onPause();
     }
 
@@ -228,12 +242,8 @@ public class GameActivity extends Activity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
+    public void onStart() { super.onStart(); }
 
     @Override
-    public void onStop() {
-        super.onStop();
-    }
+    public void onStop() { super.onStop(); }
 }
